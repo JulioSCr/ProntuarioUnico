@@ -2,41 +2,73 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta content="True" name="HandheldFriendly" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>WebFi</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Libs/Bootstrap/bootstrap.css?" + DateTimeOffset.Now)" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Libs/Bootstrap/bootstrap-grid.css?" + DateTimeOffset.Now)" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Libs/Global/Global.css?" + DateTimeOffset.Now)" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Views/Shared/Layout.css?" + DateTimeOffset.Now)" />
+    @RenderSection("head", required: false)
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+
+<body load style="display:none;">
+    @* Cabeçalho *@
+    <header id="hdrLayout_Cabecalho">
+        <h1 id="Principal">
+            <a href="#">
+                <img id="imgLayout_Logo" src="~/Content/Imagens/Shared/imgLogo.png" />
+            </a>
+        </h1>
+        <nav id="navLayout_Cabecalho" role="navigation">
+            <ul id="lstLayout_Menu">
+                <li>
+                    <a class="click-especial" href="#">Prontuário</a>
+                </li>
+                <li>
+                    <a class="click-especial" href="#">Link</a>
+                </li>
+                @*<li>
+                <a id="spnOndeBuscarAjuda" class="click-especial" href="#">Onde buscar ajuda</a>
+            </li>*@
+            </ul>
+            <div class="cssLayout_Dropdown_Menu">
+                <button id="btnMenu">
+                    <img class="cssImagemFundo" src="~/Content/Imagens/Shared/imgAccountUser.png" />
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <ul id="divLayout_ContentMenu">
+                    <li class="cssLayout_ContextMenu__Item">
+                        <a href="#">Meu Perfil</a>
+                    </li>   
+                    <li class="cssLayout_ContextMenu__Separador"></li>
+                    <li class="cssLayout_ContextMenu__Item">
+                        <a href="#">Sair</a>
+                    </li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
+        </nav>
+    </header>
+    @* Menu de opções usuário *@
+    <main>
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </main>
+    <script src="@Url.Content("~/Scripts/Libs/Jquery/jquery-3.4.1.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Libs/Bootstrap/bootstrap.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Libs/Bootstrap/bootstrap.bundle.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Libs/Global/Global.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Views/Shared/Layout.js?" + DateTimeOffset.Now)"></script>
+    <script>
+        $(document).ready(function () {
+            //Material usa o windows load/ o que não acontece na modal, por isso é necessário o código abaixo
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+            var gstrGlobalPath = new String();
+            try {
+		        gstrGlobalPath = getGlobalPath();
+	        } catch (ex) {
+                alert(ex);
+            }
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
