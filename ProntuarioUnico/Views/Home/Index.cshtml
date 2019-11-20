@@ -28,89 +28,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cssIndex_TbProntuario_Row">
-                        <td>17896</td>
-                        <td>Consulta</td>
-                        <td>15/11/2019 11:30</td>
-                        <td>
-                            <button>
-                                <img src="~/Content/Imagens/Home/imgDown.png" />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row_Descricao">
-                        <td colspan="4">
-                            <div>
-                                <h2>Especialista:</h2>
-                                <p>Dr. Jorge Neto</p>
-                                <h2>Especialidade:</h2>
-                                <p>Cirurgião gastro</p>
-                                <h2>Observações:</h2>
-                                <p>Casos de dores abdominais crônicas indicativos de gastrite, requisição de exames.Casos de dores abdominais crônicas indicativos de gastrite, requisição de exames.</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row">
-                        <td>17896</td>
-                        <td>Consulta</td>
-                        <td>15/11/2019 11:30</td>
-                        <td>
-                            <button>
-                                <img src="~/Content/Imagens/Home/imgDown.png" />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row_Descricao">
-                        <td colspan="4">
-                            <p>Conteúdo oculto aqui</p>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row">
-                        <td>17896</td>
-                        <td>Consulta</td>
-                        <td>15/11/2019 11:30</td>
-                        <td>
-                            <button>
-                                <img src="~/Content/Imagens/Home/imgDown.png" />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row_Descricao">
-                        <td colspan="4">
-                            <p>Conteúdo oculto aqui</p>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row">
-                        <td>17896</td>
-                        <td>Consulta</td>
-                        <td>15/11/2019 11:30</td>
-                        <td>
-                            <button>
-                                <img src="~/Content/Imagens/Home/imgDown.png" />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row_Descricao">
-                        <td colspan="4">
-                            <p>Conteúdo oculto aqui</p>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row">
-                        <td>17896</td>
-                        <td>Consulta</td>
-                        <td>15/11/2019 11:30</td>
-                        <td>
-                            <button>
-                                <img src="~/Content/Imagens/Home/imgDown.png" />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row_Descricao">
-                        <td colspan="4">
-                            <p>Conteúdo oculto aqui</p>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            <script type="text/template" data-template="tmpIndex_TbProntuario_Rows">
+                <tr class="cssIndex_TbProntuario_Row">
+                    <td>${Atendimento_NR}</td>
+                    <td>${Atendimento_TP}</td>
+                    <td>${Atendimento_DT}</td>
+                    <td>
+                        <button>
+                            <img src="Content/Imagens/Home/imgDown.png" />
+                        </button>
+                    </td>
+                </tr>
+                <tr class="cssIndex_TbProntuario_Row_Descricao">
+                    <td colspan="4">
+                        <div>
+                            <h2>Especialista:</h2>
+                            <p>${Medico_NM}</p>
+                            <h2>Especialidade:</h2>
+                            <p>${Medico_Especialidade}</p>
+                            <h2>Observações:</h2>
+                            <p>${Atendimento_DS}</p>
+                        </div>
+                    </td>
+                </tr>
+            </script>
         </div>
     </div>
