@@ -58,7 +58,21 @@ function getGlobalPath() {
     try {
         lobjLocation = window.location;
         larrPath = lobjLocation.pathname.split('/');
-        lstrGlobalPath = lobjLocation.protocol + '//' + lobjLocation.host + '/' + larrPath[1] + '/' + larrPath[2] + '/' + larrPath[3] + '/' + larrPath[4];
+        lstrGlobalPath = lobjLocation.protocol + '//' + lobjLocation.host;
+        return lstrGlobalPath;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+function getFullGlobalPath() {
+    var lobjLocation = new Object();
+    var lstrGlobalPath = new String();
+    var larrPath = new Array();
+    try {
+        lobjLocation = window.location;
+        larrPath = lobjLocation.pathname.split('/');
+        lstrGlobalPath = lobjLocation.protocol + '//' + lobjLocation.host + '/' + larrPath[1] + '/' + larrPath[2];
         return lstrGlobalPath;
     } catch (ex) {
         throw ex;

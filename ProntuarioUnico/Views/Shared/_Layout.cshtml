@@ -58,16 +58,7 @@
     <script src="@Url.Content("~/Scripts/Libs/Global/Global.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Views/Shared/Layout.js?" + DateTimeOffset.Now)"></script>
     <script>
-        $(document).ready(function () {
-            //Material usa o windows load/ o que não acontece na modal, por isso é necessário o código abaixo
-
-            var gstrGlobalPath = new String();
-            try {
-		        gstrGlobalPath = getGlobalPath();
-	        } catch (ex) {
-                alert(ex);
-            }
-        });
+        var gstrGlobalPath = getGlobalPath();
     </script>
     @RenderSection("scripts", required: false)
 </body>

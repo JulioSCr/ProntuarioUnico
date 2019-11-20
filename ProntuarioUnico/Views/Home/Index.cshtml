@@ -1,31 +1,116 @@
-﻿@*@{
-    ViewBag.Title = "Home Page";
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@section head {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Views/Home/Index.css?" + DateTimeOffset.Now)" />
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/Home/Index.js?" + DateTimeOffset.Now)"></script>
+}
+
+    <div id="divIndex_Principal">
+        @* Título da página *@
+        <div id="divIndex_Titulo">
+            <div></div>
+            <label>Prontuário</label>
+        </div>
+        @* Tabela *@
+        <div id="divIndex_ContainerTabela">
+            <table id="tblIndex_TbProntuario">
+                <thead>
+                    <tr>
+                        <th>Nr. Atendimento</th>
+                        <th>Atendimento</th>
+                        <th>Dt. Atendimento</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cssIndex_TbProntuario_Row">
+                        <td>17896</td>
+                        <td>Consulta</td>
+                        <td>15/11/2019 11:30</td>
+                        <td>
+                            <button>
+                                <img src="~/Content/Imagens/Home/imgDown.png" />
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row_Descricao">
+                        <td colspan="4">
+                            <div>
+                                <h2>Especialista:</h2>
+                                <p>Dr. Jorge Neto</p>
+                                <h2>Especialidade:</h2>
+                                <p>Cirurgião gastro</p>
+                                <h2>Observações:</h2>
+                                <p>Casos de dores abdominais crônicas indicativos de gastrite, requisição de exames.Casos de dores abdominais crônicas indicativos de gastrite, requisição de exames.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row">
+                        <td>17896</td>
+                        <td>Consulta</td>
+                        <td>15/11/2019 11:30</td>
+                        <td>
+                            <button>
+                                <img src="~/Content/Imagens/Home/imgDown.png" />
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row_Descricao">
+                        <td colspan="4">
+                            <p>Conteúdo oculto aqui</p>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row">
+                        <td>17896</td>
+                        <td>Consulta</td>
+                        <td>15/11/2019 11:30</td>
+                        <td>
+                            <button>
+                                <img src="~/Content/Imagens/Home/imgDown.png" />
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row_Descricao">
+                        <td colspan="4">
+                            <p>Conteúdo oculto aqui</p>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row">
+                        <td>17896</td>
+                        <td>Consulta</td>
+                        <td>15/11/2019 11:30</td>
+                        <td>
+                            <button>
+                                <img src="~/Content/Imagens/Home/imgDown.png" />
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row_Descricao">
+                        <td colspan="4">
+                            <p>Conteúdo oculto aqui</p>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row">
+                        <td>17896</td>
+                        <td>Consulta</td>
+                        <td>15/11/2019 11:30</td>
+                        <td>
+                            <button>
+                                <img src="~/Content/Imagens/Home/imgDown.png" />
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cssIndex_TbProntuario_Row_Descricao">
+                        <td colspan="4">
+                            <p>Conteúdo oculto aqui</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@

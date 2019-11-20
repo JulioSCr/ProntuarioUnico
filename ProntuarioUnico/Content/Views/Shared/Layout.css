@@ -14,6 +14,8 @@
     width: 100%;
     z-index: 0;
     background-color: #e0e0e0;
+    display: flex;
+    justify-content: space-between;
 }
 
 #imgLayout_Logo {
@@ -23,18 +25,32 @@
 }
 
 #navLayout_Cabecalho {
-    position: relative;
-    right: 0;
-    top: 0;
+    position: initial;
+    right: unset;
+    top: unset;
+    display: flex;
     height: 100%;
 }
 
 #lstLayout_Menu {
-    background-color: #e0e0e0;
     width: 160px;
+    height: 100%;
     z-index: 3;
     transition: 500ms all;
-    box-shadow: 0 8px 8px 0 rgba(0,0,0,.2);
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    box-shadow: none;
+    padding-top: 17px;
+    margin-right: 70px;
+}
+
+#lstLayout_Menu li {
+    flex: 1;
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    padding: 50px 10px;
 }
 
 .menu-ativo {
@@ -43,22 +59,19 @@
     height: calc(100vh - 89px);
 }
 
-.menu-inativo {
-    position: fixed !important;
-    height: calc(100vh - 50px) !important;
-    right: -160px !important;
-}
-
 #lstLayout_Menu li a {
     text-decoration: none;
     font-family: Arial;
     font-weight: bold;
     color: black;
-    padding: 15px 25px;
     text-decoration: none;
     display: block;
     font-size: 1.0rem;
     text-align: left;
+    display: inline-flex;
+    font-size: 0.9rem;
+    width: max-content;
+    padding: 7px 9px;
 }
 
 #btnMenu {
@@ -121,55 +134,9 @@
     display: flex;
     flex-direction: column;
 }
-/*#endregion ContentMenu*/
-@media only screen and (min-width: 970px) {
-    /* #region Cabeçalho */
-    #hdrLayout_Cabecalho {
-        display: flex;
-        justify-content: space-between;
-    }
 
-    #imgLogo {
-        padding: 25px;
-        height: 120px;
-    }
-
-    #navLayout_Cabecalho {
-        position: initial;
-        right: unset;
-        top: unset;
-        display: flex;
-    }
-
-    #lstLayout_Menu {
-        display: flex;
-        height: 100%;
-        flex-direction: row;
-        box-sizing: border-box;
-        box-shadow: none;
-        padding-top: 17px;
-        margin-right: 70px;
-    }
-
-    #lstLayout_Menu li {
-        flex: 1;
-        display: inline-flex;
-        text-align: center;
-        justify-content: center;
-        padding: 50px 10px;
-    }
-
-    #lstLayout_Menu li a {
-        display: inline-flex;
-        font-size: 0.9rem;
-        width: max-content;
-        padding: 7px 9px;
-    }
-
-    #spnOndeBuscarAjuda {
-        width: max-content;
-        background-color: black;
-        color: #e0e0e0 !important;
-    }
-    /* #endregion Cabeçalho */
+#imgLogo {
+    padding: 25px;
+    height: 120px;
 }
+/*#endregion ContentMenu*/

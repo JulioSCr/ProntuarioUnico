@@ -184,6 +184,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Imagens\Home\imgDown.png" />
+    <Content Include="Content\Imagens\Home\imgUp.png" />
     <Content Include="Content\Imagens\Shared\imgAccountUser.png" />
     <Content Include="Content\Imagens\Shared\imgLogo.png" />
     <Content Include="Content\Libs\Bootstrap\bootstrap-grid.css" />
@@ -193,6 +195,7 @@
     <Content Include="Content\Libs\Bootstrap\bootstrap.css" />
     <Content Include="Content\Libs\Bootstrap\bootstrap.min.css" />
     <Content Include="Content\Libs\Global\Global.css" />
+    <Content Include="Content\Views\Home\Index.css" />
     <Content Include="Content\Views\Shared\Layout.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -236,6 +239,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Views\Home\Index.js" />
     <Content Include="Scripts\Views\Shared\Layout.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
