@@ -13,6 +13,11 @@ namespace ProntuarioUnico.Controllers
             return View();
         }
 
+        //public ActionResult Login()
+        //{
+        //    return View(Url.Content("~/Views/Login/Login.cshtml"));
+        //}
+
         //public ActionResult About()
         //{
         //    ViewBag.Message = "Your application description page.";

@@ -68,4 +68,20 @@ ruby, section, summary, time, mark, audio, video {
     font-size: 1.05rem !important;
 }
 
+.btn.btn-primary {
+    background-color: #425366 !important;
+}
+
 /*#endregion Global*/
+
+/*#region Modal*/
+.modal.fade {
+    display: flex !important;
+    align-items: center !important;
+    z-index: -1;
+}
+
+.modal.fade.show{
+    z-index: 1041;
+}
+/*#endregion Modal*/

@@ -3,6 +3,13 @@
     meleBtnMenu: document.querySelector('#btnMenu')
 }
 
+Layout.Sair = function () {
+    try {
+        location.href = gstrGlobalPath + 'Login';
+    } catch (ex) {
+        alert(ex);
+    }
+}
 
 window.addEventListener('click', (e) => {
     var lblnExibir = false;

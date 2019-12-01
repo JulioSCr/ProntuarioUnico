@@ -1,4 +1,106 @@
-﻿function FormataDataStr(vobjValue, vblnHora, vblnMinuto, vblnSegundo) {
+﻿$.ajaxSetup({
+    type: 'post',
+    dataType: 'json',
+    cache: false,
+    error: function (XMLHttpRequest, textStatus, errorThrown) { //Catch
+        if (XMLHttpRequest.status == 403 || (XMLHttpRequest.responseText.indexOf('<html>') >= 0 && XMLHttpRequest.responseText.indexOf('<title>') <= 0)) {
+            if (window.msgExibir) {
+                msgExibir(XMLHttpRequest.status + ' - ' + XMLHttpRequest.statusText);
+            } else {
+                alert(XMLHttpRequest.status + ' - ' + XMLHttpRequest.statusText);
+            }
+        } else {
+            if (window.Loading) {
+                Loading(false);
+            }
+            if (window.msgExibir) {
+                msgExibir(errorThrown + '\n\n' + $(XMLHttpRequest.responseText).filter('title').get(0).innerText);
+            } else {
+                alert(errorThrown + '\n\n' + $(XMLHttpRequest.responseText).filter('title').get(0).innerText);
+            }
+        }
+    },
+    beforeSend: function (xhr) {
+        var lobjToken = $('input[name=__RequestVerificationToken]').val();
+        xhr.setRequestHeader('__RequestVerificationToken', lobjToken);
+        if (window.Loading) {
+            Loading(true);
+        }
+    },
+    complete: function (xhr, textStatus) {
+        if (window.Loading) {
+            Loading(false);
+        }
+    }
+});
+
+Date.prototype.toJSON = function () {
+    return this.getFullYear() + "/" + ((this.getMonth() + 1) < 10 ? '0' + (this.getMonth() + 1) : (this.getMonth() + 1)) + "/" + this.getDate() + " " + (this.getHours() < 10 ? '0' + this.getHours() : this.getHours()) + ":" + (this.getMinutes() < 10 ? '0' + this.getMinutes() : this.getMinutes()) + ':' + (this.getSeconds() < 10 ? '0' + this.getSeconds() : this.getSeconds());
+};
+
+Number.prototype.round = function (places) {
+    return +(Math.round(this + "e+" + places) + "e-" + places);
+}
+
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function (prefix) {
+        return this.indexOf(prefix) === 0;
+    }
+}
+
+if (!String.prototype.endsWith) {
+    String.prototype.endsWith = function (searchString, position) {
+        var subjectString = this.toString();
+        if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+            position = subjectString.length;
+        }
+        position -= searchString.length;
+        var lastIndex = subjectString.indexOf(searchString, position);
+        return lastIndex !== -1 && lastIndex === position;
+    };
+}
+
+if (!String.prototype.padLeft) {
+    String.prototype.padLeft = function (l, c) { return Array(l - this.length + 1).join(c || ' ') + this }
+}
+
+if (!String.prototype.padRight) {
+    String.prototype.padRight = function (l, c) { return this + Array(l - this.length + 1).join(c || ' ') }
+}
+
+// Warn if overriding existing method
+if (Array.prototype.equals) {
+    console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+}
+// attach the .equals method to Array's prototype to call it on any array
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l = this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
+        }
+    }
+    return true;
+}
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "equals", { enumerable: false });
+
+
+function FormataDataStr(vobjValue, vblnHora, vblnMinuto, vblnSegundo) {
     var lstrData = new String('');
 
     try {
@@ -113,6 +215,21 @@ function LoadCss(vstrNome, vstrGolbalPath) {
         document.head.appendChild(lobjCss);
     } catch (ex) {
         throw ex;
+    }
+}
+
+function Redirecionar(vobjEvent, vstrUrl) {
+    var lstrReturnURL = new String('');
+    try {
+        if (vobjEvent == null) {
+            lstrReturnURL = vstrUrl;
+        }
+
+        if (lstrReturnURL.length > 0) {
+            location.href = gstrGlobalPath + lstrReturnURL;
+        }
+    } catch (ex) {
+        msgExibir(ex);
     }
 }
 

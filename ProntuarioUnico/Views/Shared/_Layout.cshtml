@@ -1,4 +1,9 @@
 ﻿<!DOCTYPE html>
+
+@{ 
+    ProntuarioUnico.Global mobjGlobal = new ProntuarioUnico.Global();
+}
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -42,7 +47,7 @@
                     </li>   
                     <li class="cssLayout_ContextMenu__Separador"></li>
                     <li class="cssLayout_ContextMenu__Item">
-                        <a href="#">Sair</a>
+                        <a href="javascript:Layout.Sair()">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +63,8 @@
     <script src="@Url.Content("~/Scripts/Libs/Global/Global.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Views/Shared/Layout.js?" + DateTimeOffset.Now)"></script>
     <script>
-        var gstrGlobalPath = getGlobalPath();
+        var gstrGlobalPath = '@mobjGlobal.Monta_GlobalPath(Request)';
+        //var gstrGlobalPath = getGlobalPath();
     </script>
     @RenderSection("scripts", required: false)
 </body>
