@@ -50,11 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\EntityConfig\PessoaFisicaConfig.cs" />
+    <Compile Include="Context\EntityConfig\TipoDocumentoConfig.cs" />
     <Compile Include="Context\ProntuarioUnicoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\PessoaFisicaRepository.cs" />
+    <Compile Include="Repository\TipoDocumentoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\Configurations\" />
+    <ProjectReference Include="..\ProntuarioUnico.Business\ProntuarioUnico.Business.csproj">
+      <Project>{B512C5C3-5ADA-4721-BE6A-B0BDC7854F15}</Project>
+      <Name>ProntuarioUnico.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

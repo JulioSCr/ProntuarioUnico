@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ProntuarioUnico.Business.Interfaces.Business;
+using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.Business.Entities;
 
 namespace ProntuarioUnico.Controllers
 {

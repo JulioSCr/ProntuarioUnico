@@ -40,13 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\PessoaFisicaBusiness.cs" />
+    <Compile Include="Entities\PessoaFisica.cs" />
+    <Compile Include="Entities\TipoDocumento.cs" />
+    <Compile Include="Interfaces\Business\IPessoaFisicaBusiness.cs" />
+    <Compile Include="Interfaces\Data\IPessoaFisicaRepository.cs" />
+    <Compile Include="Interfaces\Data\ITipoDocumentoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\Business\" />
-    <Folder Include="Interfaces\Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
