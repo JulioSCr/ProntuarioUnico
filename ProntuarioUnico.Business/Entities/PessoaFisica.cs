@@ -13,7 +13,7 @@ namespace ProntuarioUnico.Business.Entities
         public DateTime DataNascimento { get; set; }
         public String DescricaoTelefone { get; set; }
         public long CodigoTipoDocumento { get; set; }
-        public long NumeroDocumento { get; set; }
+        public String NumeroDocumento { get; set; }
         public bool Ativo { get; set; }
         public DateTime DataAtualizacao { get; set; }
 

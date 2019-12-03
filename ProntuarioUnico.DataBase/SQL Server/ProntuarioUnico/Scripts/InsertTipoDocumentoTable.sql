@@ -11,4 +11,5 @@ INSERT INTO [dbo].[TIPO_DOCUMENTO]
 		   ('Carteira de Registro Nacional Migratório - CRNM')
 GO
 
-
+INSERT INTO TIPO_ATENDIMENTO (DS_TIPO_ATENDIMENTO)
+VALUES ('Consulta'), ('Exame')

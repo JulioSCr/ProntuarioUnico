@@ -68,4 +68,7 @@
     <None Include="SQL Server\ProntuarioUnico\Scripts\InsertTipoDocumentoTable.sql" />
     <None Include="SQL Server\ProntuarioUnico\Tables\create_table_scripts.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SQL Server\ProntuarioUnico\Views\create_views_scripts.sql" />
+  </ItemGroup>
 </Project>

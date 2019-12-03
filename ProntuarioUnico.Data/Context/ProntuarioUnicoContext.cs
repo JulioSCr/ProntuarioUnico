@@ -13,11 +13,13 @@ namespace ProntuarioUnico.Data.Context
     {
         public DbSet<PessoaFisica> Pessoas { get; set; }
         public DbSet<TipoDocumento> TiposDocumento { get; set; }
+        public DbSet<Prontuario> Prontuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new PessoaFisicaConfig());
             modelBuilder.Configurations.Add(new TipoDocumentoConfig());
+            modelBuilder.Configurations.Add(new ProntuarioConfig());
 
             Database.SetInitializer<ProntuarioUnicoContext>(null);
         }
