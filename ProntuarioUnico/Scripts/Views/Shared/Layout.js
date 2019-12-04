@@ -3,19 +3,18 @@
     meleBtnMenu: document.querySelector('#btnMenu')
 }
 
-Layout.Sair = function () {
+Layout.btnLayout_PrincipalClick = function () {
     try {
-        location.href = gstrGlobalPath + 'Login';
+        Redirecionar('InserirAtendimento/Index');
     } catch (ex) {
         alert(ex);
     }
 }
 
-window.addEventListener('click', (e) => {
-    var lblnExibir = false;
+Layout.Sair = function () {
     try {
-        
+        Redirecionar('Login');
     } catch (ex) {
         alert(ex);
     }
-});
+}

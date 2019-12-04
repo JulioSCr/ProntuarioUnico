@@ -33,7 +33,6 @@
 }
 
 #lstLayout_Menu {
-    width: 160px;
     height: 100%;
     z-index: 3;
     transition: 500ms all;
@@ -42,7 +41,6 @@
     box-sizing: border-box;
     box-shadow: none;
     padding-top: 17px;
-    margin-right: 70px;
 }
 
 #lstLayout_Menu li {
@@ -87,6 +85,22 @@
 #btnMenu:focus {
     outline: 0;
 }
+
+#btnLayout_Principal {
+    background-color: rgba(58, 33, 33, 1);
+    color: #e0e0e0 !important;
+    transition: background-color 1s;
+}
+
+#btnLayout_Principal:hover{
+    background-color: rgba(58, 33, 33, 0.75);
+}
+
+#btnLayout_Principal:active {
+    transition: unset;
+    background-color: rgba(58, 33, 33, 1);
+}
+
 /* #endregion Cabeçalho */
 
 /*#region ContentMenu*/
@@ -140,3 +154,37 @@
     height: 120px;
 }
 /*#endregion ContentMenu*/
+
+/*#region Corpo*/
+
+#divLayout_Principal {
+    background-color: #F7EFEF;
+    width: 90%;
+    height: fit-content;
+    min-height: calc(100vh - 197px);
+    margin: 20px 0;
+    border: 1px solid #C0C0C0;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+}
+
+#divLayout_Titulo {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#divLayout_Titulo div {
+    height: 50px;
+    width: 12px;
+    background-color: #425366;
+}
+
+#divLayout_Titulo label {
+    padding: 10px;
+    color: #425366;
+    font-family: Verdana;
+    font-size: 1.3rem;
+}
+
+/*#endregion Corpo*/

@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Views/InserirAtendimento/Index.css?" + DateTimeOffset.Now)" />
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/InserirAtendimento/Index.js?" + DateTimeOffset.Now)"></script>
+}
+
+    <div id="divInserirAtendimentoIndex_Container">
+        <div id="divInserirAtendimentoIndex_Especialidade" class="cssInserirAtendimentoIndex_Box">
+            <label class="cssInserirAtendimentoIndex_Box_Label" for="txtInserirAtendimento_NrProntuario">Número Prontuário:</label>
+            <input type="text" class="cssInserirAtendimentoIndex_Box_Componente form-control" id="txtInserirAtendimento_NrProntuario">
+        </div>
+        <div id="divInserirAtendimentoIndex_Especialidade" class="cssInserirAtendimentoIndex_Box">
+            <label class="cssInserirAtendimentoIndex_Box_Label" for="cboInserirAtendimentoIndex_Especialidade">Especialidade:</label>
+            <select class="cssInserirAtendimentoIndex_Box_Componente form-control" id="cboInserirAtendimentoIndex_Especialidade">
+                <option></option>
+            </select>
+        </div>
+        <div class="cssInserirAtendimentoIndex_Box">
+            <label class="cssInserirAtendimentoIndex_Box_Label" for="cboInserirAtendimentoIndex_TipoAtendimento">Tipo de Atendimento:</label>
+            <select class="cssInserirAtendimentoIndex_Box_Componente form-control" id="cboInserirAtendimentoIndex_TipoAtendimento">
+                <option></option>
+            </select>
+        </div>
+        <div class="cssInserirAtendimentoIndex_Box cssInserirAtendimentoIndex_TextArea">
+            <label class="cssInserirAtendimentoIndex_Box_Label cssInserirAtendimentoIndex_TextArea_Label" for="txtInserirAtendimento_Observacoes">Observações:</label>
+            <textarea class="form-control" id="txtInserirAtendimento_Observacoes" rows="3"></textarea>
+            <button id="btnIndex_Salvar" type="button" class="btn btn-primary" onclick="InserirAtendimento_Index.Salvar()">Salvar</button>
+        </div>
+        <script type="text/template" data-template="tmpInserirAtendimento_Option">
+            <option key_expr="${value}">${name}</option>
+        </script>
+    </div>

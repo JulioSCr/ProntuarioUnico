@@ -218,18 +218,23 @@ function LoadCss(vstrNome, vstrGolbalPath) {
     }
 }
 
-function Redirecionar(vobjEvent, vstrUrl) {
-    var lstrReturnURL = new String('');
+function Redirecionar(vstrUrl) {
     try {
-        if (vobjEvent == null) {
-            lstrReturnURL = vstrUrl;
-        }
-
-        if (lstrReturnURL.length > 0) {
-            location.href = gstrGlobalPath + lstrReturnURL;
+        if (vstrUrl.length > 0) {
+            location.href = gstrGlobalPath + vstrUrl;
         }
     } catch (ex) {
-        msgExibir(ex);
+        throw ex;
+    }
+}
+
+function TituloPagina(vstrTitulo) {
+    var lobjDivLayout_Titulo = new Object();
+    try {
+        lobjDivLayout_Titulo = $('#divLayout_Titulo label');
+        lobjDivLayout_Titulo.text(vstrTitulo);
+    } catch (ex) {
+        throw ex;
     }
 }
 

@@ -22,28 +22,9 @@ namespace ProntuarioUnico.Controllers
 
         public ActionResult Index()
         {
-            List<PessoaFisica> pessoas = this.PessoaFisicaBusiness.Listar();
-            List<TipoDocumento> tiposDocumento = this.TipoDocumentoRepository.Listar();
+            //List<PessoaFisica> pessoas = this.PessoaFisicaBusiness.Listar();
+            //List<TipoDocumento> tiposDocumento = this.TipoDocumentoRepository.Listar();
             return View();
         }
-
-        //public ActionResult Login()
-        //{
-        //    return View(Url.Content("~/Views/Login/Login.cshtml"));
-        //}
-
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
     }
 }

@@ -10,49 +10,42 @@
     <script src="@Url.Content("~/Scripts/Views/Home/Index.js?" + DateTimeOffset.Now)"></script>
 }
 
-    <div id="divIndex_Principal">
-        @* Título da página *@
-        <div id="divIndex_Titulo">
-            <div></div>
-            <label>Prontuário</label>
-        </div>
-        @* Tabela *@
-        <div id="divIndex_ContainerTabela">
-            <table id="tblIndex_TbProntuario">
-                <thead>
-                    <tr>
-                        <th>Nr. Atendimento</th>
-                        <th>Atendimento</th>
-                        <th>Dt. Atendimento</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <script type="text/template" data-template="tmpIndex_TbProntuario_Rows">
-                <tr class="cssIndex_TbProntuario_Row">
-                    <td>${Atendimento_NR}</td>
-                    <td>${Atendimento_TP}</td>
-                    <td>${Atendimento_DT}</td>
-                    <td>
-                        <button>
-                            <img src="@Url.Content("~/Content/Imagens/Home/imgDown.png")" />
-                        </button>
-                    </td>
-                </tr>
-                <tr class="cssIndex_TbProntuario_Row_Descricao">
-                    <td colspan="4">
-                        <div>
-                            <h2>Especialista:</h2>
-                            <p>${Medico_NM}</p>
-                            <h2>Especialidade:</h2>
-                            <p>${Medico_Especialidade}</p>
-                            <h2>Observações:</h2>
-                            <p>${Atendimento_DS}</p>
-                        </div>
-                    </td>
-                </tr>
-            </script>
-        </div>
-    </div>
+@* Tabela *@
+<div id="divIndex_ContainerTabela">
+    <table id="tblIndex_TbProntuario">
+        <thead>
+            <tr>
+                <th>Nr. Atendimento</th>
+                <th>Atendimento</th>
+                <th>Dt. Atendimento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script type="text/template" data-template="tmpIndex_TbProntuario_Rows">
+        <tr class="cssIndex_TbProntuario_Row">
+            <td>${Atendimento_NR}</td>
+            <td>${Atendimento_TP}</td>
+            <td>${Atendimento_DT}</td>
+            <td>
+                <button>
+                    <img src="@Url.Content("~/Content/Imagens/Home/imgDown.png")" />
+                </button>
+            </td>
+        </tr>
+        <tr class="cssIndex_TbProntuario_Row_Descricao">
+            <td colspan="4">
+                <div>
+                    <h2>Especialista:</h2>
+                    <p>${Medico_NM}</p>
+                    <h2>Especialidade:</h2>
+                    <p>${Medico_Especialidade}</p>
+                    <h2>Observações:</h2>
+                    <p>${Atendimento_DS}</p>
+                </div>
+            </td>
+        </tr>
+    </script>
+</div>

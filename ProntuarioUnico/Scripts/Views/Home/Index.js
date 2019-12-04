@@ -37,6 +37,8 @@ Index.MontarTela = function () {
 
 Index.CriarComponentes = function () {
     try {
+        // Carrega título da página
+        TituloPagina('Prontuário');
         // Carrega os dados da tabela
         Index.GerarTbProntuario(Index.marrDataSource_TbProntuario);
         // Ação de clique nas linhas da tabela

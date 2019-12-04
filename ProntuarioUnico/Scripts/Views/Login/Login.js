@@ -32,7 +32,7 @@ Login.Logar = function () {
                         debugger;
                         
                         
-                        Redirecionar(null, 'Home/Index');
+                        Redirecionar('Home/Index');
 
                     } catch (ex) {
                         alert(ex);

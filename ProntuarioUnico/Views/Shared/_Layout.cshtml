@@ -33,9 +33,9 @@
                 <li>
                     <a class="click-especial" href="#">Link</a>
                 </li>
-                @*<li>
-                <a id="spnOndeBuscarAjuda" class="click-especial" href="#">Onde buscar ajuda</a>
-            </li>*@
+                <li>
+                    <a id="btnLayout_Principal" href="javascript:Layout.btnLayout_PrincipalClick()">Atendimento</a>
+                </li>
             </ul>
             <div class="cssLayout_Dropdown_Menu">
                 <button id="btnMenu">
@@ -55,7 +55,14 @@
     </header>
     @* Menu de opções usuário *@
     <main>
-        @RenderBody()
+        <div id="divLayout_Principal">
+            @* Título da página *@
+            <div id="divLayout_Titulo">
+                <div></div>
+                <label></label>
+            </div>
+            @RenderBody()
+        </div>
     </main>
     <script src="@Url.Content("~/Scripts/Libs/Jquery/jquery-3.4.1.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Libs/Bootstrap/bootstrap.js?" + DateTimeOffset.Now)"></script>
@@ -64,7 +71,6 @@
     <script src="@Url.Content("~/Scripts/Views/Shared/Layout.js?" + DateTimeOffset.Now)"></script>
     <script>
         var gstrGlobalPath = '@mobjGlobal.Monta_GlobalPath(Request)';
-        //var gstrGlobalPath = getGlobalPath();
     </script>
     @RenderSection("scripts", required: false)
 </body>

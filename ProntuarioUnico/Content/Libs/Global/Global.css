@@ -1,4 +1,14 @@
 ﻿/*#region Global*/
+select {
+    text-align: center;
+    text-align-last: center;
+}
+
+option {
+    text-align: right;
+    text-align-last: right;
+}
+
 p {
     font-size: 1.2rem !important;
 }
