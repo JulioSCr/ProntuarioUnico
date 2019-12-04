@@ -184,7 +184,9 @@
     <Compile Include="Mappers\AutoMapperConfig.cs" />
     <Compile Include="Mappers\ExempleMapper.cs" />
     <Compile Include="Mappers\ExtensionsMapper.cs" />
+    <Compile Include="Mappers\MapperAtendimentoViewModelToAtendimento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AtendimentoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Imagens\Home\imgDown.png" />
@@ -269,7 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

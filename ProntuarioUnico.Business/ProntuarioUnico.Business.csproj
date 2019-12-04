@@ -41,10 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\PessoaFisicaBusiness.cs" />
+    <Compile Include="Entities\Atendimento.cs" />
+    <Compile Include="Entities\EspecialidadeAtendimento.cs" />
     <Compile Include="Entities\PessoaFisica.cs" />
     <Compile Include="Entities\Prontuario.cs" />
     <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Interfaces\Business\IPessoaFisicaBusiness.cs" />
+    <Compile Include="Interfaces\Data\IAtendimentoRepository.cs" />
+    <Compile Include="Interfaces\Data\IEspecialidadeAtendimentoRepository.cs" />
     <Compile Include="Interfaces\Data\IPessoaFisicaRepository.cs" />
     <Compile Include="Interfaces\Data\IProntuarioRepository.cs" />
     <Compile Include="Interfaces\Data\ITipoDocumentoRepository.cs" />
