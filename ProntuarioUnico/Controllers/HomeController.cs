@@ -1,5 +1,6 @@
 ﻿using ProntuarioUnico.Business.Entities;
 using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.ViewModels;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -16,10 +17,12 @@ namespace ProntuarioUnico.Controllers
 
         public ActionResult Index()
         {
-            int codigo = 0; // devemos receber o código da pessoa física referente a quem está logado para passar como parâmetro no método.
+            int codigo = 16; // devemos receber o código da pessoa física referente a quem está logado para passar como parâmetro no método.
 
             List<Prontuario> prontuarios = this.ProntuarioRepository.Listar(codigo);
-            return View(prontuarios);
+            ProntuarioViewModel model = new ProntuarioViewModel(prontuarios);
+
+            return View(model);
         }
     }
 }
