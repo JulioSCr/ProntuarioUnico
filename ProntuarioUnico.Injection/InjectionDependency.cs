@@ -29,6 +29,9 @@ namespace ProntuarioUnico.Injection
             // Data
             container.Register<IPessoaFisicaRepository, PessoaFisicaRepository>(Lifestyle.Scoped);
             container.Register<ITipoDocumentoRepository, TipoDocumentoRepository>(Lifestyle.Scoped);
+            container.Register<IProntuarioRepository, ProntuarioRepository>(Lifestyle.Scoped);
+            container.Register<IEspecialidadeAtendimentoRepository, EspecialidadeAtendimentoRepository>(Lifestyle.Scoped);
+            container.Register<IAtendimentoRepository, AtendimentoRepository>(Lifestyle.Scoped);
 
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
