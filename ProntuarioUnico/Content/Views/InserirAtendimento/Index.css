@@ -25,8 +25,68 @@ body {
 
 /*#endregion Conteudo principal*/
 
-/*#region Containers*/
+/*#region Filtros*/
 
+.cssInserirAtendimentoIndex_Filtro {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-bottom: 1px solid #B7A5A5;
+    border-top: 1px solid #B7A5A5;
+    margin: auto;
+    /*margin-bottom: 30px;*/
+    cursor: pointer;
+    transition: background-color 500ms;
+}
+
+.cssInserirAtendimentoIndex_Filtro:active{
+    background-color: #C0C0C0;
+}
+
+.cssInserirAtendimentoIndex_Label {
+    width: 50px;
+    color: #B7A5A5;
+    font-weight: 600;
+    padding: 3px 0;
+}
+
+#btnInserirAtendimentoIndex_Accordion {
+    display: flex;
+    border: unset;
+    background-color: transparent;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    margin-left: calc(100% - 80px);
+}
+
+#btnInserirAtendimentoIndex_Accordion:focus {
+    outline: 0;
+}
+
+.cssInserirAtendimentoIndex_Filtro_Container {
+    width: 95%;
+    margin: auto;
+    padding: 0 20px 0;
+    margin-bottom: 40px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max=height 0.4s ease-in-out;
+}
+
+#btnInserirAtendimentoIndex_Procurar {
+    width: 100px;
+    margin-left: calc(100% - 100px);
+}
+
+#frmInserirAtendimentoIndex_Filtro{
+    z-index: 0;
+}
+
+/*#endregion Filtros*/
+
+/*#region Containers*/
 .cssInserirAtendimentoIndex_Box {
     width: 60%;
     display: flex;
@@ -40,7 +100,15 @@ body {
     justify-content: center;
 }
 
-.cssInserirAtendimentoIndex_Box.cssInserirAtendimentoIndex_TextArea{
+.cssInserirAtendimentoIndex_Box_Botoes {
+    width: 60%;
+    display: flex;
+    margin: 10px 0;
+    height: 80px;
+    align-items: center;
+}
+
+.cssInserirAtendimentoIndex_Box.cssInserirAtendimentoIndex_TextArea {
     height: auto;
     flex-direction: column;
     padding: 15px 0;
@@ -71,9 +139,17 @@ body {
 }
 
 #btnIndex_Salvar {
-    width: 100px;
+    width: 215px;
     padding: 10px 0;
     margin: 20px 0 0 0;
+    margin-left: calc(100% - 430px);
+}
+
+#btnIndex_Limpar {
+    width: 215px;
+    padding: 10px 0;
+    margin: 20px 0 0 0;
+    background-color: #D91C1C !important;
 }
 
 /*#endregion Containers*/

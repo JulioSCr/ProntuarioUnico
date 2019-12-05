@@ -192,6 +192,8 @@
   <ItemGroup>
     <Content Include="Content\Imagens\Home\imgDown.png" />
     <Content Include="Content\Imagens\Home\imgUp.png" />
+    <Content Include="Content\Imagens\InserirAtendimento\add.png" />
+    <Content Include="Content\Imagens\InserirAtendimento\close.png" />
     <Content Include="Content\Imagens\Shared\imgAccountUser.png" />
     <Content Include="Content\Imagens\Shared\imgLogo.png" />
     <Content Include="Content\Libs\Bootstrap\bootstrap-grid.css" />
