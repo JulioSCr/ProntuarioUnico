@@ -84,6 +84,12 @@ body {
     z-index: 0;
 }
 
+.cssInserirAtendimentoIndex_lblFiltros {
+    padding: 5px 0;
+    color: #425366;
+    font-weight: 600;
+}
+
 /*#endregion Filtros*/
 
 /*#region Containers*/
