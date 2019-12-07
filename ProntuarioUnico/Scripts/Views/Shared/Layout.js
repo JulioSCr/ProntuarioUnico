@@ -3,6 +3,14 @@
     meleBtnMenu: document.querySelector('#btnMenu')
 }
 
+Layout.AbrirProntuario = function () {
+    try {
+        Redirecionar('Home/Index');
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
 Layout.btnLayout_PrincipalClick = function () {
     try {
         Redirecionar('InserirAtendimento/Index');

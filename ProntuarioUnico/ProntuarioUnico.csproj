@@ -193,6 +193,8 @@
   <ItemGroup>
     <Content Include="Content\Imagens\Home\imgDown.png" />
     <Content Include="Content\Imagens\Home\imgUp.png" />
+    <Content Include="Content\Imagens\InserirAtendimento\add.png" />
+    <Content Include="Content\Imagens\InserirAtendimento\close.png" />
     <Content Include="Content\Imagens\Shared\imgAccountUser.png" />
     <Content Include="Content\Imagens\Shared\imgLogo.png" />
     <Content Include="Content\Libs\Bootstrap\bootstrap-grid.css" />
@@ -233,6 +235,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\Libs\Jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Libs\Global\Global.js" />
     <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.js" />

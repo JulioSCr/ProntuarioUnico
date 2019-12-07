@@ -41,6 +41,8 @@ InserirAtendimento_Index.CriarComponentes = function () {
         InserirAtendimento_Index.Carregar_cboInserirAtendimentoIndex_TipoAtendimento(this.marrDataSource_cboInserirAtendimentoIndex_TipoAtendimento);
         // Carregar cboInserirAtendimentoIndex_Especialidade
         InserirAtendimento_Index.Carregar_cboInserirAtendimentoIndex_Especialidade(this.marrDataSource_cboInserirAtendimentoIndex_Especialidade);
+        // Carregar filtro
+        InserirAtendimento_Index.Carregar_Filtro();
     } catch (ex) {
         alert(ex);
     }
@@ -92,6 +94,49 @@ InserirAtendimento_Index.Salvar = function () {
         lobjAtendimento.TipoAtendimento_ID = parseInt($('#cboInserirAtendimentoIndex_TipoAtendimento option:selected').attr('key_expr'));
         lobjAtendimento.Atendimento_DS = $('#txtInserirAtendimento_Observacoes').val();
         console.log(lobjAtendimento);
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
+InserirAtendimento_Index.Carregar_Filtro = function () {
+    var lobjFiltro = new Object();
+    var lobjFiltroContent = new Object();
+    try {
+        lobjFiltro = document.getElementsByClassName('cssInserirAtendimentoIndex_Filtro');
+
+        for (var i = 0; i < lobjFiltro.length; i++) {
+            lobjFiltro[i].onclick = function () {
+                lobjFiltroContent = this.nextElementSibling;
+
+                if (lobjFiltroContent.style.maxHeight) {
+                    lobjFiltroContent.style.maxHeight = null;
+                    lobjFiltroContent.style.borderBottom = 'none';
+                    lobjFiltroContent.style.padding = '0';
+                    this.getElementsByTagName('button')[0].firstElementChild.src = gstrGlobalPath + 'Content/Imagens/InserirAtendimento/add.png';
+                } else {
+                    lobjFiltroContent.style.maxHeight = '100vh';
+                    lobjFiltroContent.style.borderBottom = 1 + 'px solid #B7A5A5';
+                    lobjFiltroContent.style.padding = '20px 20px 10px';
+                    this.getElementsByTagName('button')[0].firstElementChild.src = gstrGlobalPath + 'Content/Imagens/InserirAtendimento/close.png';
+                }
+            }//InserirAtendimento_Index.Filtro_Click();
+        }
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
+InserirAtendimento_Index.Filtro_Click = function () {
+    var lobjFiltroContent = new Object();
+    try {
+        lobjFiltroContent = this.nextElementSibling;
+
+        if (lobjFiltroContent.style.maxHeight) {
+            lobjFiltroContent.style.maxHeight = null;
+        } else {
+            lobjFiltroContent.style.maxHeight = lobjFiltroContent.scrollHeight + 'px';
+        }
     } catch (ex) {
         alert(ex);
     }
