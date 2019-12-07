@@ -9,7 +9,7 @@ namespace ProntuarioUnico.Business.Interfaces.Data
 {
     public interface IPessoaFisicaRepository
     {
-        PessoaFisica Obter(long codigo);
+        PessoaFisica Obter(Int32 codigo);
 
         PessoaFisica Obter(String cpf);
 

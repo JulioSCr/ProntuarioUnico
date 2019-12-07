@@ -189,9 +189,12 @@
     <Compile Include="Mappers\ExempleMapper.cs" />
     <Compile Include="Mappers\ExtensionsMapper.cs" />
     <Compile Include="Mappers\MapperAtendimentoViewModelToAtendimento.cs" />
+    <Compile Include="Mappers\PessoaFisicaToPessoaFisicaViewModel.cs" />
+    <Compile Include="Mappers\PessoaFisicaViewModelToPessoaFisica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AtendimentoViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PessoaFisicaViewModel.cs" />
     <Compile Include="ViewModels\ProntuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +262,33 @@
     <Content Include="Global\Scripts\Views\InserirAtendimento\Index.js" />
     <Content Include="Global\Scripts\Views\Login\Login.js" />
     <Content Include="Global\Scripts\Views\Shared\Layout.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.bundle.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.js" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\Libs\Global\Global.js" />
+    <None Include="Scripts\Libs\Jquery\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\Libs\Jquery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery.validate.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery.validate.min.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Libs\Jquery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Views\Home\Index.js" />
+    <Content Include="Scripts\Views\Login\Login.js" />
+    <Content Include="Scripts\Views\PessoaFisica\Index.js" />
+    <Content Include="Scripts\Views\Shared\Layout.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -278,10 +308,24 @@
     <Content Include="Global\Scripts\umd\popper-utils.js.map" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\InserirAtendimento\Index.cshtml" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.js.map" />
+    <Content Include="Scripts\Libs\Bootstrap\bootstrap.min.js.map" />
+    <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Views\PessoaFisica\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PessoaFisica\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

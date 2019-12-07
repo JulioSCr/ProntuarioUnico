@@ -16,7 +16,6 @@ namespace ProntuarioUnico.Controllers
 {
     public class LoginController : Controller
     {
-        private ProntuarioUnico.Global mobjGlobal = new ProntuarioUnico.Global();
         private readonly IPessoaFisicaRepository PessoaFisicaRepository;
 
         public LoginController(IPessoaFisicaRepository pessoaFisicaRepository)
@@ -27,75 +26,30 @@ namespace ProntuarioUnico.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            ViewBag.Usuario = new LoginViewModel();
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult Logar(String vstrCPF, String vstrSenha)
+        public ActionResult Logar(LoginViewModel usuario)
         {
-            // Retorno
-            object lobjException = null;
-            // Objetos
-            Exception lexcMensagem = null;
-            try
-            {
-                if (mobjGlobal.AutenticaUsuarioSenha(ref lexcMensagem, vstrCPF, vstrSenha) == false)
-                {
-                    if (lexcMensagem != null)
-                    {
-                        throw lexcMensagem;
-                    }
-                    else
-                    {
-                        throw new Exception("Usuário ou senha inválidos");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (lexcMensagem == null) { lexcMensagem = ex; }
-            }
-            finally
-            {
-                if (lexcMensagem != null)
-                {
-                    lobjException = mobjGlobal.ConverterParaJson(mobjGlobal.CriarException(lexcMensagem, lexcMensagem.Message));
-                    // Rollback
-                }
-                else
-                {
-                    // Commit
-                }
-                // Fechar conexão
+            usuario.CPF = "45816622811";
+            usuario.Senha = "Cavalos123";
 
-                lexcMensagem = null;
-            }
-
-            return Json(
-                new
-                {
-                    Exception = lobjException
-                },
-                "json"
-            );
-        }
-
-        [HttpPost]
-        public ActionResult Logar(LoginViewModel login)
-        {
-            if (login.Valido())
+            if (usuario.Valido())
             {
-                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(login.CPF);
+                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(usuario.CPF);
 
                 if (pessoa != default(PessoaFisica))
                 {
-                    String senhaBase64 = Utils.Base64Encode(login.Senha);
-                    String senhaBanco = Utils.Base64Decode(pessoa.Senha);
+                    String senhaBase64 = Utils.Base64Encode(usuario.Senha);
 
-                    if (pessoa.Senha.Equals(senhaBase64) && senhaBanco.Equals(pessoa.Senha))
+                    if (pessoa.Senha.Equals(senhaBase64))
                     {
-                        UserAuthentication.Login(login.CPF, pessoa.Codigo);
-                        return View("Home", "Index");
+                        UserAuthentication.Login(usuario.CPF, pessoa.Codigo);
+                        return RedirectToAction("Index", "PessoaFisica");
+                        //return RedirectToAction("Index", "Home");
                     }
                 }
             }

@@ -9,7 +9,7 @@ namespace ProntuarioUnico.Business.Entities
 {
     public class PessoaFisica : BaseEntity
     {
-        public long Codigo { get; set; }
+        public Int32 Codigo { get; set; }
         public String Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public String NumeroTelefone { get; set; }
@@ -34,11 +34,16 @@ namespace ProntuarioUnico.Business.Entities
 
         public void Alterar(string cPF, DateTime dataNascimento, string nome, string numeroTelefone, string senha)
         {
+            if (!string.IsNullOrEmpty(cPF) && !string.IsNullOrWhiteSpace(cPF))
+                this.CPF = cPF;
+
+            if (!string.IsNullOrEmpty(senha) && !string.IsNullOrWhiteSpace(senha))
+                this.Senha = senha;
+
             this.CPF = cPF;
             this.DataNascimento = dataNascimento;
             this.Nome = nome;
             this.NumeroTelefone = numeroTelefone;
-            this.Senha = senha;
             this.Ativo = true;
             this.DataAtualizacao = DateTime.Now;
         }

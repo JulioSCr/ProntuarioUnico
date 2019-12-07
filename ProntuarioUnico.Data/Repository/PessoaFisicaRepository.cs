@@ -16,7 +16,7 @@ namespace ProntuarioUnico.Data.Repository
             this.Context = new ProntuarioUnicoContext();
         }
 
-        public PessoaFisica Obter(long codigo)
+        public PessoaFisica Obter(Int32 codigo)
         {
             return this.Context.Pessoas.SingleOrDefault(_ => _.Codigo == codigo);
         }

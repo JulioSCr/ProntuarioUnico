@@ -10,7 +10,7 @@ namespace ProntuarioUnico.ViewModels.Login
         public String CPF { get; set; }
         public String Senha { get; set; }
 
-        internal LoginViewModel()
+        public LoginViewModel()
         {
 
         }

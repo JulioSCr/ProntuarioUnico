@@ -1,9 +1,5 @@
 ﻿<!DOCTYPE html>
 
-@{
-    ProntuarioUnico.Global mobjGlobal = new ProntuarioUnico.Global();
-}
-
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,14 +20,14 @@
                 <img src="~/Content/Imagens/Shared/imgLogo.png" />
             </div>
             @*Formulário para login*@
-            <form id="frmLogin_Entrar" action="@Url.Action("Logar", "Login")" style="display: block;">
+            <form action="@Url.Action("Logar", "Login")" method="post" style="display: block;">
                 <div class="form-group">
-                    <label for="Login.CPF">Login</label>
-                    <input type="text" class="form-control" id="Login.CPF" aria-describedby="emailHelp" placeholder="CPF" required>
+                    <label for="UsuarioCPF">Login</label>
+                    <input type="text" class="form-control" id="LoginCPF" name="Usuario.CPF" value="@ViewBag.Usuario.CPF" aria-describedby="emailHelp" placeholder="CPF" required>
                 </div>
                 <div class="form-group">
-                    <label for="Login.Senha">Senha</label>
-                    <input type="password" class="form-control" id="Login.Senha" placeholder="Digite sua senha" required>
+                    <label for="UsuarioSenha">Senha</label>
+                    <input type="password" class="form-control" id="LoginSenha" name="Usuario.Senha" value="@ViewBag.Usuario.Senha" placeholder="Digite sua senha" required>
                     <a href="javascript:Login.spnLogin_EsqueceuSenha_Click()" id="spnLogin_EsqueceuSenha" class="form-text text-muted">Esqueceu sua senha?</a>
                 </div>
                 <div class="form-row">
@@ -129,8 +125,8 @@
     <script src="@Url.Content("~/Scripts/Libs/Bootstrap/bootstrap.bundle.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Libs/Global/Global.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Views/Login/Login.js?" + DateTimeOffset.Now)"></script>
-    <script>
+    @*<script>
         var gstrGlobalPath = '@mobjGlobal.Monta_GlobalPath(Request)';
-    </script>
+    </script>*@
 </body>
 </html>
