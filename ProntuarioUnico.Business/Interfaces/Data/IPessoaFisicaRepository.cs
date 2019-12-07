@@ -9,6 +9,12 @@ namespace ProntuarioUnico.Business.Interfaces.Data
 {
     public interface IPessoaFisicaRepository
     {
-        List<PessoaFisica> Listar();
+        PessoaFisica Obter(long codigo);
+
+        PessoaFisica Obter(String cpf);
+
+        PessoaFisica Alterar(PessoaFisica novaPessoaFisica);
+
+        PessoaFisica Cadastrar(PessoaFisica novaPessoaFisica);
     }
 }

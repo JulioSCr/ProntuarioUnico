@@ -9,6 +9,5 @@ namespace ProntuarioUnico.Business.Interfaces.Business
 {
     public interface IPessoaFisicaBusiness
     {
-        List<PessoaFisica> Listar();
     }
 }

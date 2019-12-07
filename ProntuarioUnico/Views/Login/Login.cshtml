@@ -24,14 +24,14 @@
                 <img src="~/Content/Imagens/Shared/imgLogo.png" />
             </div>
             @*Formulário para login*@
-            <form id="frmLogin_Entrar" style="display: block;">
+            <form id="frmLogin_Entrar" action="@Url.Action("Logar", "Login")" style="display: block;">
                 <div class="form-group">
-                    <label for="txtLogin_Login">Login</label>
-                    <input type="text" class="form-control" id="txtLogin_Login" aria-describedby="emailHelp" placeholder="CPF" required>
+                    <label for="Login.CPF">Login</label>
+                    <input type="text" class="form-control" id="Login.CPF" aria-describedby="emailHelp" placeholder="CPF" required>
                 </div>
                 <div class="form-group">
-                    <label for="txtLogin_Senha">Senha</label>
-                    <input type="password" class="form-control" id="txtLogin_Senha" placeholder="Digite sua senha" required>
+                    <label for="Login.Senha">Senha</label>
+                    <input type="password" class="form-control" id="Login.Senha" placeholder="Digite sua senha" required>
                     <a href="javascript:Login.spnLogin_EsqueceuSenha_Click()" id="spnLogin_EsqueceuSenha" class="form-text text-muted">Esqueceu sua senha?</a>
                 </div>
                 <div class="form-row">
@@ -39,7 +39,8 @@
                         <a href="javascript:Login.spnLogin_CriarConta_Click()" id="spnLogin_CriarConta" class="form-text text-muted">Criar conta</a>
                     </div>
                     <div class="col cssLogin_BtnRigth">
-                        <button id="btnLogin_Entrar" type="button" class="btn btn-primary" onclick="Login.Logar()">Entrar</button>
+                        @*<button id="btnLogin_Entrar" type="button" class="btn btn-primary" onclick="Login.Logar()">Entrar</button>*@
+                        <input class="btn btn-primary" type="submit" value="Entrar">
                     </div>
                 </div>
             </form>

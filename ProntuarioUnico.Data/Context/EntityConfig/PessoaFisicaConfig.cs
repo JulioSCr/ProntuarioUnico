@@ -19,9 +19,9 @@ namespace ProntuarioUnico.Data.Context.EntityConfig
             Property(p => p.Codigo).HasColumnName("CD_PESSOA_FISICA");
             Property(p => p.Nome).HasColumnName("NM_PESSOA_FISICA");
             Property(p => p.DataNascimento).HasColumnName("DT_NASCIMENTO");
-            Property(p => p.DescricaoTelefone).HasColumnName("DS_TELEFONE");
-            Property(p => p.CodigoTipoDocumento).HasColumnName("CD_TIPO_DOCUMENTO");
-            Property(p => p.NumeroDocumento).HasColumnName("VL_TIPO_DOCUMENTO");
+            Property(p => p.NumeroTelefone).HasColumnName("DS_TELEFONE");
+            Property(p => p.CPF).HasColumnName("NR_CPF");
+            Property(p => p.Senha).HasColumnName("DS_SENHA");
             Property(p => p.Ativo).HasColumnName("IE_ATIVO");
             Property(p => p.DataAtualizacao).HasColumnName("DT_ATUALIZACAO");
         }

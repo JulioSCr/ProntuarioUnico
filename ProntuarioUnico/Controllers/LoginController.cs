@@ -9,12 +9,20 @@ using System.Web.Security;
 using ProntuarioUnico.Business.Interfaces.Business;
 using ProntuarioUnico.Business.Interfaces.Data;
 using ProntuarioUnico.Business.Entities;
+using ProntuarioUnico.ViewModels.Login;
+using ProntuarioUnico.AuxiliaryClasses;
 
 namespace ProntuarioUnico.Controllers
 {
     public class LoginController : Controller
     {
         private ProntuarioUnico.Global mobjGlobal = new ProntuarioUnico.Global();
+        private readonly IPessoaFisicaRepository PessoaFisicaRepository;
+
+        public LoginController(IPessoaFisicaRepository pessoaFisicaRepository)
+        {
+            this.PessoaFisicaRepository = pessoaFisicaRepository;
+        }
 
         // GET: Login
         public ActionResult Login()
@@ -31,7 +39,8 @@ namespace ProntuarioUnico.Controllers
             Exception lexcMensagem = null;
             try
             {
-                if (mobjGlobal.AutenticaUsuarioSenha(ref lexcMensagem, vstrCPF, vstrSenha) == false) {
+                if (mobjGlobal.AutenticaUsuarioSenha(ref lexcMensagem, vstrCPF, vstrSenha) == false)
+                {
                     if (lexcMensagem != null)
                     {
                         throw lexcMensagem;
@@ -40,7 +49,7 @@ namespace ProntuarioUnico.Controllers
                     {
                         throw new Exception("Usuário ou senha inválidos");
                     }
-}
+                }
             }
             catch (Exception ex)
             {
@@ -69,6 +78,29 @@ namespace ProntuarioUnico.Controllers
                 },
                 "json"
             );
+        }
+
+        [HttpPost]
+        public ActionResult Logar(LoginViewModel login)
+        {
+            if (login.Valido())
+            {
+                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(login.CPF);
+
+                if (pessoa != default(PessoaFisica))
+                {
+                    String senhaBase64 = Utils.Base64Encode(login.Senha);
+                    String senhaBanco = Utils.Base64Decode(pessoa.Senha);
+
+                    if (pessoa.Senha.Equals(senhaBase64) && senhaBanco.Equals(pessoa.Senha))
+                    {
+                        UserAuthentication.Login(login.CPF, pessoa.Codigo);
+                        return View("Home", "Index");
+                    }
+                }
+            }
+
+            return Json("CPF ou senha inválidos.");
         }
     }
 }

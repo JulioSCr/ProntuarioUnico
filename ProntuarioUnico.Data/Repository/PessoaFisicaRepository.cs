@@ -2,10 +2,8 @@
 using ProntuarioUnico.Business.Interfaces.Data;
 using ProntuarioUnico.Data.Context;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProntuarioUnico.Data.Repository
 {
@@ -18,9 +16,40 @@ namespace ProntuarioUnico.Data.Repository
             this.Context = new ProntuarioUnicoContext();
         }
 
-        public List<PessoaFisica> Listar()
+        public PessoaFisica Obter(long codigo)
         {
-            return this.Context.Pessoas.ToList();
+            return this.Context.Pessoas.SingleOrDefault(_ => _.Codigo == codigo);
+        }
+
+        public PessoaFisica Obter(string cpf)
+        {
+            return this.Context.Pessoas.SingleOrDefault(_ => _.CPF == cpf);
+        }
+
+        public PessoaFisica Alterar(PessoaFisica novaPessoaFisica)
+        {
+            PessoaFisica pessoa = this.Obter(novaPessoaFisica.Codigo);
+
+            if (pessoa == default(PessoaFisica))
+                throw new Exception("Pessoa Física não encontrada");
+
+            pessoa.Alterar(novaPessoaFisica.CPF, novaPessoaFisica.DataNascimento, novaPessoaFisica.Nome, novaPessoaFisica.NumeroTelefone, novaPessoaFisica.Senha);
+
+            var entry = Context.Entry(pessoa);
+            entry.State = EntityState.Modified;
+            this.Context.SaveChanges();
+
+            return pessoa;
+        }
+
+        public PessoaFisica Cadastrar(PessoaFisica novaPessoaFisica)
+        {
+            PessoaFisica pessoa = new PessoaFisica(novaPessoaFisica.Nome, novaPessoaFisica.DataNascimento, novaPessoaFisica.NumeroTelefone, novaPessoaFisica.CPF, novaPessoaFisica.Senha);
+
+            this.Context.Pessoas.Add(pessoa);
+            this.Context.SaveChanges();
+
+            return pessoa;
         }
     }
 }

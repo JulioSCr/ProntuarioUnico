@@ -17,10 +17,5 @@ namespace ProntuarioUnico.Business.Business
         {
             this.PessoaFisicaRepository = pessoaFisicaRepository;
         }
-
-        public List<PessoaFisica> Listar()
-        {
-            return this.PessoaFisicaRepository.Listar();
-        }
     }
 }

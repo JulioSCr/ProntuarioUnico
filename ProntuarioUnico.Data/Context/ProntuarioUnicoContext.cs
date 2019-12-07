@@ -12,7 +12,6 @@ namespace ProntuarioUnico.Data.Context
     public class ProntuarioUnicoContext : DbContext
     {
         public DbSet<PessoaFisica> Pessoas { get; set; }
-        public DbSet<TipoDocumento> TiposDocumento { get; set; }
         public DbSet<Prontuario> Prontuarios { get; set; }
         public DbSet<EspecialidadeAtendimento> EspecialidadesAtendimento { get; set; }
         public DbSet<Atendimento> Atendimentos { get; set; }
@@ -20,7 +19,6 @@ namespace ProntuarioUnico.Data.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new PessoaFisicaConfig());
-            modelBuilder.Configurations.Add(new TipoDocumentoConfig());
             modelBuilder.Configurations.Add(new ProntuarioConfig());
             modelBuilder.Configurations.Add(new EspecialidadeAtendimentoConfig());
             modelBuilder.Configurations.Add(new AtendimentoConfig());
