@@ -372,6 +372,7 @@
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Views\PessoaFisica\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Medico\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

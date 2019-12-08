@@ -121,4 +121,46 @@ Login.spnLogin_MedicoVoltar_Click = function () {
         alert(ex);
     }
 }
+
+Login.Teste = function () {
+    var lblnRetorno = false;
+    var lstrCPF = new String();
+    var vstrSenha = new String();
+
+    try {
+        lstrCPF = $('#txtLogin_Login').val();
+        lstrSenha = $('#txtLogin_Senha').val();
+
+        lobjLogar = {
+            vstrCPF: lstrCPF.trim(),
+            vstrSenha: lstrSenha.trim()
+        };
+        $.ajax({
+            type: 'POST',
+            url: gstrGlobalPath + 'Login/AutenticaPessoa',
+            async: false,
+            data: JSON.stringify(lobjLogar),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (data, textStatus, XMLHttpRequest) {
+                try {
+                    if (data.Exception != null) { throw JSON.parse(data.Exception).Message }
+                    lblnRetorno = data.Retorno;
+                    if (!lblnRetorno) {
+                        $('#divLogin_ModalRecuperarSenha').modal("show", true);
+                        $('#msgRetorno').text("CPF ou senha inválidos.");
+                    }
+                } catch (ex) {
+                    alert(ex);
+                }
+            },
+            error: function () {
+                throw 'Ocorreu um erro!';
+            }
+        });
+        return lblnRetorno;
+    } catch (ex) {
+        alert(ex);
+    }
+}
 //#endregion Voltar
