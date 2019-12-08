@@ -9,11 +9,11 @@ using System.Web;
 
 namespace ProntuarioUnico.Mappers
 {
-    public class MapperNovoUsuarioViewModelToPessoaFisica : Profile
+    public class MapperNovoUsuarioPessoaFisicaViewModelToPessoaFisica : Profile
     {
-        public MapperNovoUsuarioViewModelToPessoaFisica()
+        public MapperNovoUsuarioPessoaFisicaViewModelToPessoaFisica()
         {
-            CreateMap<NovoUsuarioViewModel, PessoaFisica>()
+            CreateMap<NovoUsuarioPessoaFisicaViewModel, PessoaFisica>()
                 .ForMember(model => model.Nome, _ => _.MapFrom(viewModel => viewModel.Nome))
                 .ForMember(model => model.CPF, _ => _.MapFrom(viewModel => viewModel))
                 .ForMember(model => model.DataNascimento, _ => _.MapFrom(viewModel => viewModel.DataNascimento))
@@ -23,7 +23,7 @@ namespace ProntuarioUnico.Mappers
 
         public override string ProfileName
         {
-            get { return "MapperNovoUsuarioViewModelToPessoaFisica"; }
+            get { return "MapperNovoUsuarioPessoaFisicaViewModelToPessoaFisica"; }
         }
     }
 }

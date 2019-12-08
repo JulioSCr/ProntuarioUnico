@@ -45,11 +45,13 @@
     <Compile Include="Entities\Base\BaseEntity.cs" />
     <Compile Include="Entities\Enums\StatusLogin.cs" />
     <Compile Include="Entities\EspecialidadeAtendimento.cs" />
+    <Compile Include="Entities\Medico.cs" />
     <Compile Include="Entities\PessoaFisica.cs" />
     <Compile Include="Entities\Prontuario.cs" />
     <Compile Include="Interfaces\Business\IPessoaFisicaBusiness.cs" />
     <Compile Include="Interfaces\Data\IAtendimentoRepository.cs" />
     <Compile Include="Interfaces\Data\IEspecialidadeAtendimentoRepository.cs" />
+    <Compile Include="Interfaces\Data\IMedicoRepository.cs" />
     <Compile Include="Interfaces\Data\IPessoaFisicaRepository.cs" />
     <Compile Include="Interfaces\Data\IProntuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

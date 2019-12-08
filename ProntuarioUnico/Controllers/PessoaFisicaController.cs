@@ -20,7 +20,7 @@ namespace ProntuarioUnico.Controllers
         // GET: PessoaFisica
         public ActionResult Index()
         {
-            string codigo = UserAuthentication.ObterCodigoPessoaFisicaLogada();
+            string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
 
             PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(Convert.ToInt32(codigo));
             PessoaFisicaViewModel viewModel = Mapper.Map<PessoaFisica, PessoaFisicaViewModel>(pessoa);

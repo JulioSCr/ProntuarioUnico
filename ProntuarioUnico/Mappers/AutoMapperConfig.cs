@@ -15,7 +15,9 @@ namespace ProntuarioUnico.Mappers
                 x.AddProfile<MapperAtendimentoViewModelToAtendimento>();
                 x.AddProfile<MapperPessoaFisicaToPessoaFisicaViewModel>();
                 x.AddProfile<MapperPessoaFisicaViewModelToPessoaFisica>();
-                x.AddProfile<MapperNovoUsuarioViewModelToPessoaFisica>();
+                x.AddProfile<MapperNovoUsuarioPessoaFisicaViewModelToPessoaFisica>();
+                x.AddProfile<MapperMedicoToMedicoViewModel>();
+                x.AddProfile<MapperMedicoViewModelToMedico>();
             });
         }
     }

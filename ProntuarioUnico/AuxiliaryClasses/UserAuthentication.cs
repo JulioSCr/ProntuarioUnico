@@ -10,11 +10,11 @@ namespace ProntuarioUnico.AuxiliaryClasses
 {
     public static class UserAuthentication
     {
-        public static StatusLogin Login(string cpf, long codigoPessoaFisica)
+        public static StatusLogin Login(string login, long codigoInterno)
         {
-            FormsAuthentication.SetAuthCookie(cpf, true);
-            HttpContext.Current.Session["usuario"] = cpf;
-            HttpContext.Current.Session["codigo_pessoa_fisica"] = Convert.ToString(codigoPessoaFisica);
+            FormsAuthentication.SetAuthCookie(login, true);
+            HttpContext.Current.Session["usuario"] = login;
+            HttpContext.Current.Session["codigo_identificacao"] = Convert.ToString(codigoInterno);
 
             return StatusLogin.Sucesso;
         }
@@ -27,9 +27,9 @@ namespace ProntuarioUnico.AuxiliaryClasses
             return StatusLogin.Out;
         }
 
-        public static string ObterCodigoPessoaFisicaLogada()
+        public static string ObterCodigoInternoUsuarioLogado()
         {
-            string login = Convert.ToString(HttpContext.Current.Session["codigo_pessoa_fisica"]);
+            string login = Convert.ToString(HttpContext.Current.Session["codigo_identificacao"]);
             return login;
         }
     }

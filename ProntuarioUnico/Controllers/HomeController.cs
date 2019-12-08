@@ -19,7 +19,7 @@ namespace ProntuarioUnico.Controllers
 
         public ActionResult Index()
         {
-            string codigo = UserAuthentication.ObterCodigoPessoaFisicaLogada();
+            string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
 
             List<Prontuario> prontuarios = this.ProntuarioRepository.Listar(Convert.ToInt32(codigo));
             ProntuarioViewModel model = new ProntuarioViewModel(prontuarios);

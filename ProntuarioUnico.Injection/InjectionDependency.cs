@@ -31,6 +31,7 @@ namespace ProntuarioUnico.Injection
             container.Register<IProntuarioRepository, ProntuarioRepository>(Lifestyle.Scoped);
             container.Register<IEspecialidadeAtendimentoRepository, EspecialidadeAtendimentoRepository>(Lifestyle.Scoped);
             container.Register<IAtendimentoRepository, AtendimentoRepository>(Lifestyle.Scoped);
+            container.Register<IMedicoRepository, MedicoRepository>(Lifestyle.Scoped);
 
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());

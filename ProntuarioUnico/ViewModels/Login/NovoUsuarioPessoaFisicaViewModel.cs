@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProntuarioUnico.ViewModels.Login
 {
-    public class NovoUsuarioViewModel
+    public class NovoUsuarioPessoaFisicaViewModel
     {
         public String Nome { get; set; }
         public String CPF { get; set; }
@@ -14,7 +14,7 @@ namespace ProntuarioUnico.ViewModels.Login
         public String Senha { get; set; }
         public String ConfirmarSenha { get; set; }
 
-        public NovoUsuarioViewModel()
+        public NovoUsuarioPessoaFisicaViewModel()
         {
 
         }
