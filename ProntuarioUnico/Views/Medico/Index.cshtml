@@ -10,20 +10,21 @@
 }
 
 @section scripts {
-    <script src="@Url.Content("~/Scripts/Views/PessoaFisica/Index.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Views/Medico/Index.js?" + DateTimeOffset.Now)"></script>
 }
 
 <div class="row lign-items-center">
     <div class="col-md-10">
         <form action="@Url.Action("Atualizar", "Medico")" method="post">
             <input type="hidden" name="medicoViewModel.Codigo" value="@Model.Codigo">
+            <input type="hidden" name="medicoViewModel.CodigoPessoaFisica" value="@Model.CodigoPessoaFisica">
             <div class="form-group">
                 <label>Nome Guerra</label>
-                <input type="text" class="form-control" name="medicoViewModel.Nome" placeholder="Nome completo" value="@Model.NomeGuerra">
+                <input type="text" class="form-control" name="medicoViewModel.NomeGuerra" placeholder="Nome completo" value="@Model.NomeGuerra">
             </div>
             <div class="form-group">
                 <label>Número CRM</label>
-                <input type="number" class="form-control" name="medicoViewModel.CPF" value="@Model.CRM">
+                <input type="number" class="form-control" name="medicoViewModel.CRM" value="@Model.CRM">
             </div>
             <div class="form-group">
                 <label>E-mail</label>

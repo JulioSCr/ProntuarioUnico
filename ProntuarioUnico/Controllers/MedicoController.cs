@@ -39,17 +39,24 @@ namespace ProntuarioUnico.Controllers
                 Medico medico = this.MedicoRepository.Obter(Convert.ToInt32(medicoViewModel.Codigo));
                 Medico medicoAtualizado = Mapper.Map<MedicoViewModel, Medico>(medicoViewModel);
 
-                if (medicoViewModel.AlterarSenha)
+                if (!this.MedicoRepository.CRMExistente(medicoViewModel.CRM))
                 {
-                    String senhaBase64 = Utils.Base64Encode(medicoViewModel.SenhaAntiga);
-
-                    if (senhaBase64.Equals(medico.Senha))
+                    if (medicoViewModel.AlterarSenha)
                     {
-                        medicoAtualizado.Senha = Utils.Base64Encode(medicoViewModel.NovaSenha);
-                    }
-                }
+                        String senhaBase64 = Utils.Base64Encode(medicoViewModel.SenhaAntiga);
 
-                this.MedicoRepository.Alterar(medicoAtualizado);
+                        if (senhaBase64.Equals(medico.Senha))
+                        {
+                            medicoAtualizado.Senha = Utils.Base64Encode(medicoViewModel.NovaSenha);
+                        }
+                    }
+
+                    this.MedicoRepository.Alterar(medicoAtualizado);
+                }
+                else
+                {
+                    return Json("CRM já foi cadastrado por um outro médico.");
+                }
             }
 
             return RedirectToAction("Index", "Medico");

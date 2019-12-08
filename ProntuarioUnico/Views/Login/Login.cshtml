@@ -124,11 +124,11 @@
             <form id="frmLogin_Entrar_Medico" action="@Url.Action("LogarMedico", "Login")" method="post" style="display: none;">
                 <div class="form-group">
                     <label for="UsuarioCPF">Login</label>
-                    <input type="text" class="form-control" id="LoginCRM" name="Medico.CRM" aria-describedby="emailHelp" placeholder="CRM" required>
+                    <input type="text" class="form-control" id="LoginCRM" name="usuario.cpf" aria-describedby="emailHelp" placeholder="CRM" required>
                 </div>
                 <div class="form-group">
                     <label for="UsuarioSenha">Senha</label>
-                    <input type="password" class="form-control" id="LoginSenha_Medico" name="Medico.Senha" placeholder="Digite sua senha" required>
+                    <input type="password" class="form-control" id="LoginSenha_Medico" name="usuario.Senha" placeholder="Digite sua senha" required>
                     <div class="form-row">
                         <div class="col-sm-6">
                             <a href="javascript:Login.spnLogin_EsqueceuSenha_Medico_Click()" id="spnLogin_EsqueceuSenha_Medico" class="form-text text-muted">Esqueceu sua senha?</a>
@@ -141,12 +141,12 @@
                     </div>
                     <div class="col cssLogin_BtnRigth">
                         @*<button id="btnLogin_Entrar" type="button" class="btn btn-primary" onclick="Login.Logar()">Entrar</button>*@
-                        <button class="btn btn-primary" type="submit" value="Entrar"></button>
+                        <input type="submit" class="btn btn-primary" value="Entrar" />
                     </div>
                 </div>
             </form>
             @*Formulário para recuperação de senha médico*@
-            <form id="frmLogin_Senha_Medico" style="display: none;">
+            <form id="frmLogin_Senha_Medico" action="@Url.Action("RecuperarAcessoMedico", "Login")" method="post" style="display: none;">
                 <div class="form-group">
                     <label for="txtLogin_NovaSenha">Login</label>
                     <input type="text" class="form-control" id="txtLogin_NovaSenha_Medico" name="crm" aria-describedby="emailHelp" placeholder="Informe seu CRM">
@@ -156,7 +156,8 @@
                         <a href="javascript:Login.btnLayoutVoltarMedico_Click()" id="btnLayoutVoltarMedico" class="form-text text-muted cssLogin_BtnVoltar">Voltar</a>
                     </div>
                     <div class="col cssLogin_BtnRigth">
-                        <button type="submit" class="btn btn-primary" value="Prosseguir"></button>
+                        <input type="submit" class="btn btn-primary" value="Prosseguir" />
+                        @*<button type="submit" class="btn btn-primary" value="Prosseguir"></button>*@
                     </div>
                 </div>
             </form>

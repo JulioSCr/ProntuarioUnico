@@ -118,7 +118,7 @@ namespace ProntuarioUnico.Controllers
                     {
                         UserAuthentication.Login(usuario.CPF, medico.Codigo);
 
-                        return RedirectToAction("Index", "PessoaFisica");
+                        return RedirectToAction("Index", "Medico");
                     }
                 }
             }
