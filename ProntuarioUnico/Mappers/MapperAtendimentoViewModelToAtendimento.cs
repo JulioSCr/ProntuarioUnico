@@ -12,10 +12,10 @@ namespace ProntuarioUnico.Mappers
     {
         public MapperAtendimentoViewModelToAtendimento()
         {
-            CreateMap<AtendimentoViewModel, Atendimento>()
-                .ForMember(model => model.CrmMedico, _ => _.MapFrom(viewModel => viewModel.CodigoMedico))
-                .ForMember(model => model.CodigoEspecialidade, _ => _.MapFrom(viewModel => viewModel.IdEspecialidade))
-                .ForMember(model => model.DescricaoObservacao, _ => _.MapFrom(viewModel => viewModel.Observacao));
+            //CreateMap<AtendimentoViewModel, Atendimento>()
+            //    .ForMember(model => model.CrmMedico, _ => _.MapFrom(viewModel => viewModel.CodigoMedico))
+            //    .ForMember(model => model.CodigoEspecialidade, _ => _.MapFrom(viewModel => viewModel.IdEspecialidade))
+            //    .ForMember(model => model.DescricaoObservacao, _ => _.MapFrom(viewModel => viewModel.Observacao));
         }
 
         public override string ProfileName

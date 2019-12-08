@@ -15,14 +15,21 @@ namespace ProntuarioUnico.Data.Context.EntityConfig
         {
             ToTable("ATENDIMENTO_PACIENTE", "DBO");
             HasKey(p => p.NumeroAtendimento);
-            Property(p => p.NumeroAtendimento).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(p => p.NumeroAtendimento).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(p => p.NumeroAtendimento).HasColumnName("NR_ATENDIMENTO");
             Property(p => p.CodigoPessoaFisica).HasColumnName("CD_PESSOA_FISICA");
-            Property(p => p.CrmMedico).HasColumnName("CRM_MEDICO");
+            Property(p => p.CodigoMedico).HasColumnName("CD_MEDICO");
             Property(p => p.CodigoTipoAtendimento).HasColumnName("ID_TIPO_ATENDIMENTO");
             Property(p => p.CodigoEspecialidade).HasColumnName("ID_ESPECIALIDADE");
             Property(p => p.DataAtendimento).HasColumnName("DT_ATENDIMENTO");
-            Property(p => p.DescricaoObservacao).HasColumnName("DS_OBSERVACAO");
+
+            Property(p => p.CodigoToken).HasColumnName("CD_TOKEN");
+
+            Property(p => p.Sintomas).HasColumnName("DS_SINTOMA");
+            Property(p => p.Diagnostico).HasColumnName("DS_DIAGNOSTICO");
+            Property(p => p.Prescricao).HasColumnName("DS_PRESCRICAO");
+
+            Property(p => p.Observacao).HasColumnName("DS_OBSERVACAO");
         }
     }
 }

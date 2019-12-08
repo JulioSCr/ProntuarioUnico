@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProntuarioUnico.Business.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace ProntuarioUnico.Business.Interfaces.Data
 {
     public interface IAtendimentoRepository
     {
+        Atendimento Cadastrar(Atendimento novoAtendimento);
 
+        Atendimento Alterar(Atendimento atendimentoAlterado);
     }
 }
