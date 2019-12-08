@@ -11,6 +11,7 @@ namespace ProntuarioUnico.Controllers
     public class LoginController : Controller
     {
         private readonly IPessoaFisicaRepository PessoaFisicaRepository;
+        private Global mobjGlobal = new Global();
 
         public LoginController(IPessoaFisicaRepository pessoaFisicaRepository)
         {
@@ -27,26 +28,78 @@ namespace ProntuarioUnico.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logar(LoginViewModel usuario)
+        public JsonResult AutenticaPessoa(String vstrCPF, String vstrSenha)
         {
-            if (usuario.Valido())
+            //Retorno
+            object lobjException = null;
+            bool lblnRetorno = false;
+            //Objetos
+            Exception lexcMensagem = null;
+            // Auxiliar
+            
+            try
             {
-                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(usuario.CPF);
-
-                if (pessoa != default(PessoaFisica))
+                if( !String.IsNullOrEmpty(vstrCPF) && !String.IsNullOrWhiteSpace(vstrCPF) &&
+                    !String.IsNullOrEmpty(vstrSenha) && !String.IsNullOrWhiteSpace(vstrSenha))
                 {
-                    String senhaBase64 = Utils.Base64Encode(usuario.Senha);
+                    PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(vstrCPF);
 
-                    if (pessoa.Senha.Equals(senhaBase64))
+                    if (pessoa != default(PessoaFisica))
                     {
-                        UserAuthentication.Login(usuario.CPF, pessoa.Codigo);
+                        String senhaBase64 = Utils.Base64Encode(vstrSenha);
 
-                        return RedirectToAction("Index", "PessoaFisica");
+                        if (pessoa.Senha.Equals(senhaBase64))
+                        {
+                            UserAuthentication.Login(vstrCPF, pessoa.Codigo);
+                            lblnRetorno = true;
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                if (lexcMensagem == null) { lexcMensagem = ex; }
+            }
+            finally
+            {
+                if (lexcMensagem != null)
+                {
+                    lobjException = mobjGlobal.ConverterParaJson(mobjGlobal.CriarException(lexcMensagem, lexcMensagem.Message));
+                    lexcMensagem = null;
+                }
+            }
+            return Json(
+                new
+                {
+                    Exception = lobjException,
+                    Retorno = lblnRetorno
+                },
+                "json"
+            );
+        }
 
-            return Json("CPF ou senha inválidos.");
+        [HttpPost]
+        public ActionResult Logar(LoginViewModel usuario)
+        {
+            //if (usuario.Valido())
+            //{
+            //    PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(usuario.CPF);
+
+            //    if (pessoa != default(PessoaFisica))
+            //    {
+            //        String senhaBase64 = Utils.Base64Encode(usuario.Senha);
+
+            //        if (pessoa.Senha.Equals(senhaBase64))
+            //        {
+            //            UserAuthentication.Login(usuario.CPF, pessoa.Codigo);
+
+            //            return RedirectToAction("Index", "PessoaFisica");
+            //        }
+            //    }
+            //}
+
+            //return Json("CPF ou senha inválidos.");
+            return RedirectToAction("Index", "PessoaFisica");
         }
 
         [HttpPost]
