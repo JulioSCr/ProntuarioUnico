@@ -10,7 +10,7 @@ namespace ProntuarioUnico.ViewModels
         public Int32 Codigo { get; set; }
         public String Nome { get; set; }
         public DateTime DataNascimento { get; set; }
-        public String NumeroTelefone { get; set; }
+        public String Email { get; set; }
         public String CPF { get; set; }
         public bool AlterarSenha { get; set; }
         public String SenhaAntiga { get; set; }
@@ -30,7 +30,7 @@ namespace ProntuarioUnico.ViewModels
             if (DataNascimento == default(DateTime) || DataNascimento == DateTime.MinValue)
                 return false;
 
-            if (string.IsNullOrEmpty(NumeroTelefone) && string.IsNullOrWhiteSpace(NumeroTelefone))
+            if (string.IsNullOrEmpty(Email) && string.IsNullOrWhiteSpace(Email))
                 return false;
 
             if (string.IsNullOrEmpty(CPF) && string.IsNullOrWhiteSpace(CPF))

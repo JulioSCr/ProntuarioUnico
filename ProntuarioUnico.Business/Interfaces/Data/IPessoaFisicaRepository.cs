@@ -16,5 +16,7 @@ namespace ProntuarioUnico.Business.Interfaces.Data
         PessoaFisica Alterar(PessoaFisica novaPessoaFisica);
 
         PessoaFisica Cadastrar(PessoaFisica novaPessoaFisica);
+
+        Boolean CPFExistente(String cpf);
     }
 }

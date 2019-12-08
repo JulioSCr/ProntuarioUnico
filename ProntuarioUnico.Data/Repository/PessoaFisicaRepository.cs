@@ -33,7 +33,7 @@ namespace ProntuarioUnico.Data.Repository
             if (pessoa == default(PessoaFisica))
                 throw new Exception("Pessoa Física não encontrada");
 
-            pessoa.Alterar(novaPessoaFisica.CPF, novaPessoaFisica.DataNascimento, novaPessoaFisica.Nome, novaPessoaFisica.NumeroTelefone, novaPessoaFisica.Senha);
+            pessoa.Alterar(novaPessoaFisica.CPF, novaPessoaFisica.DataNascimento, novaPessoaFisica.Nome, novaPessoaFisica.Email, novaPessoaFisica.Senha);
 
             var entry = Context.Entry(pessoa);
             entry.State = EntityState.Modified;
@@ -44,12 +44,17 @@ namespace ProntuarioUnico.Data.Repository
 
         public PessoaFisica Cadastrar(PessoaFisica novaPessoaFisica)
         {
-            PessoaFisica pessoa = new PessoaFisica(novaPessoaFisica.Nome, novaPessoaFisica.DataNascimento, novaPessoaFisica.NumeroTelefone, novaPessoaFisica.CPF, novaPessoaFisica.Senha);
+            PessoaFisica pessoa = new PessoaFisica(novaPessoaFisica.Nome, novaPessoaFisica.DataNascimento, novaPessoaFisica.Email, novaPessoaFisica.CPF, novaPessoaFisica.Senha);
 
             this.Context.Pessoas.Add(pessoa);
             this.Context.SaveChanges();
 
             return pessoa;
+        }
+
+        public Boolean CPFExistente(string cpf)
+        {
+            return this.Context.Pessoas.Any(_ => _.CPF == cpf);
         }
     }
 }

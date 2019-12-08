@@ -13,14 +13,13 @@
 </head>
 
 <body load style="display:none;">
-
     <main>
         <div id="divLogin_SignIn">
             <div id="divLogin_Logo">
                 <img src="~/Content/Imagens/Shared/imgLogo.png" />
             </div>
             @*Formulário para login*@
-            <form action="@Url.Action("Logar", "Login")" method="post" style="display: block;">
+            <form id="frmLogin_Entrar" action="@Url.Action("Logar", "Login")" method="post" style="display: block;">
                 <div class="form-group">
                     <label for="UsuarioCPF">Login</label>
                     <input type="text" class="form-control" id="LoginCPF" name="Usuario.CPF" value="@ViewBag.Usuario.CPF" aria-describedby="emailHelp" placeholder="CPF" required>
@@ -41,10 +40,10 @@
                 </div>
             </form>
             @*Formulário para recuperação de senha*@
-            <form id="frmLogin_Senha" style="display: none;">
+            <form id="frmLogin_Senha" action="@Url.Action("RecuperarAcesso", "Login")" method="post" style="display: none;">
                 <div class="form-group">
                     <label for="txtLogin_NovaSenha">Login</label>
-                    <input type="email" class="form-control" id="txtLogin_NovaSenha" aria-describedby="emailHelp" placeholder="Usuário ou CPF">
+                    <input type="text" class="form-control" id="txtLogin_NovaSenha" name="cpf" aria-describedby="emailHelp" placeholder="Informe seu CPF">
                 </div>
                 <div class="form-row">
                     <div class="col">
@@ -52,7 +51,9 @@
                     </div>
                     <div class="col cssLogin_BtnRigth">
                         @*Botão para acionar modal*@
-                        <button id="btnLogin_NovaSenha" type="button" class="btn btn-primary" data-target="#divLogin_ModalRecuperarSenha" data-toggle="modal">Prosseguir</button>
+                        @*<button id="btnLogin_NovaSenha" type="button" class="btn btn-primary" data-target="#divLogin_ModalRecuperarSenha" data-toggle="modal">Prosseguir</button>*@
+                        
+                        <input type="submit" class="btn btn-primary" value="Prosseguir">
                     </div>
                 </div>
             </form>
@@ -60,12 +61,6 @@
             <div class="modal fade" id="divLogin_ModalRecuperarSenha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        @*<div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>*@
                         <div class="modal-body">
                             <br /><h1>E-mail enviado para endereço vinculado a conta.</h1><br />
                         </div>
@@ -77,34 +72,34 @@
                 </div>
             </div>
             @*Formulário para criar conta*@
-            <form id="frmLogin_CriarConta" style="display: none;">
+            <form id="frmLogin_CriarConta" action="@Url.Action("Cadastrar", "Login")" method="post" style="display: none;">
                 <div class="form-group">
                     <label for="txtLogin_Nome">Nome</label>
-                    <input type="text" class="form-control" id="txtLogin_Nome" aria-describedby="emailHelp" placeholder="Nome completo" required>
+                    <input type="text" class="form-control" id="txtLogin_Nome" name="novoUsuario.Nome" aria-describedby="emailHelp" placeholder="Nome completo" required>
                 </div>
                 <div class="form-row">
                     <div class=" col-sm-5">
                         <label for="txtLogin_CPF">CPF</label>
-                        <input type="text" class="form-control" id="txtLogin_CPF" placeholder="CPF" required>
+                        <input type="text" class="form-control" id="txtLogin_CPF"  name="novoUsuario.CPF" placeholder="CPF" required>
                     </div>
                     <div class="col-sm-7">
                         <label for="txtLogin_DtNasc">Data de nascimento</label>
-                        <input type="date" class="form-control" id="txtLogin_DtNasc" required>
+                        <input type="date" class="form-control" name="novoUsuario.DataNascimento" id="txtLogin_DtNasc" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="txtLogin_Email">E-mail</label>
-                    <input type="email" class="form-control" id="txtLogin_Email" placeholder="E-mail" required>
+                    <label for="txtLogin_Email">Telefone</label>
+                    <input type="text" class="form-control" id="txtLogin_Telefone" name="novoUsuario.Email" placeholder="Telefone" required>
                 </div>
                 <div class="form-row">
                     <div class=" col-sm-6">
                         <label for="txtLogin_CadastroSenha">Senha</label>
-                        <input type="password" class="form-control" id="txtLogin_CadastroSenha" placeholder="Senha" required>
+                        <input type="password" class="form-control" id="txtLogin_CadastroSenha" name="novoUsuario.Senha" placeholder="Senha" required>
                         <div class="invalid-tooltip">Campo obrigatório</div>
                     </div>
                     <div class="col-sm-6">
                         <label for="txtLogin_CadastroSenha_Confirmar">Confirmar senha</label>
-                        <input type="password" class="form-control" id="txtLogin_CadastroSenha_Confirmar" placeholder="Confirmar Senha" required>
+                        <input type="password" class="form-control" id="txtLogin_CadastroSenha_Confirmar" name="novoUsuario.ConfirmarSenha" placeholder="Confirmar Senha" required>
                         <div class="invalid-tooltip">Campo obrigatório</div>
                     </div>
                 </div>
@@ -113,7 +108,8 @@
                         <a href="javascript:Login.spnLogin_Cancelar_Click()" id="spnLogin_Cancelar" class="form-text text-muted">Cancelar</a>
                     </div>
                     <div class="col cssLogin_BtnRigth">
-                        <button id="btnLogin_Salvar" type="submit" class="btn btn-primary">Salvar</button>
+                        @*<button id="btnLogin_Salvar" type="submit" class="btn btn-primary">Salvar</button>*@
+                        <input type="submit" class="btn btn-primary" value="Cadastrar">
                     </div>
                 </div>
             </form>

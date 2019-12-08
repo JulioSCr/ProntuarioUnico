@@ -15,11 +15,11 @@ namespace ProntuarioUnico.Data.Context.EntityConfig
         {
             ToTable("PESSOA_FISICA", "DBO");
             HasKey(p => p.Codigo);
-            Property(p => p.Codigo).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(p => p.Codigo).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(p => p.Codigo).HasColumnName("CD_PESSOA_FISICA");
             Property(p => p.Nome).HasColumnName("NM_PESSOA_FISICA");
             Property(p => p.DataNascimento).HasColumnName("DT_NASCIMENTO");
-            Property(p => p.NumeroTelefone).HasColumnName("DS_TELEFONE");
+            Property(p => p.Email).HasColumnName("DS_EMAIL");
             Property(p => p.CPF).HasColumnName("NR_CPF");
             Property(p => p.Senha).HasColumnName("DS_SENHA");
             Property(p => p.Ativo).HasColumnName("IE_ATIVO");
