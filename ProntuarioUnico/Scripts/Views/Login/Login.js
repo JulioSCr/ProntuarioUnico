@@ -86,4 +86,39 @@ Login.spnLogin_Cancelar_Click = function () {
     }
 }
 
+Login.spnLogin_SouMedico_Click = function () {
+    try {
+        $('#frmLogin_Entrar').css({ display: 'none' });
+        $('#frmLogin_Entrar_Medico').css({ display: 'block' });
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
+Login.spnLogin_EsqueceuSenha_Medico_Click = function () {
+    try {
+        $('#frmLogin_Entrar_Medico').css({ display: 'none' });
+        $('#frmLogin_Senha_Medico').css({ display: 'block' });
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
+Login.btnLayoutVoltarMedico_Click = function () {
+    try {
+        $('#frmLogin_Senha_Medico').css({ display: 'none' });
+        $('#frmLogin_Entrar_Medico').css({ display: 'block' });
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
+Login.spnLogin_MedicoVoltar_Click = function () {
+    try {
+        $('#frmLogin_Entrar_Medico').css({ display: 'none' });
+        $('#frmLogin_Entrar').css({ display: 'block' });
+    } catch (ex) {
+        alert(ex);
+    }
+}
 //#endregion Voltar
