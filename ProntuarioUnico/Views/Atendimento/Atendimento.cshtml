@@ -1,0 +1,60 @@
+﻿@using ProntuarioUnico.ViewModels.Atendimento
+@model AtendimentoViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Views/Home/Index.css?" + DateTimeOffset.Now)" />
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/PessoaFisica/Index.js?" + DateTimeOffset.Now)"></script>
+}
+
+<h3>Atendimento - Nome Paciente: @ViewBag.NomePessoa </h3>
+
+<div class="row lign-items-center">
+    <div class="col-md-10">
+        <form action="@Url.Action("Cadastrar", "Atendimento")" method="post">
+            <input type="hidden" name="viewModel.CodigoPessoaFisica" value="@ViewBag.CodigoPessoaFisica">
+            <div class="form-group">
+                <label> Tipo de Atendimento </label>
+                <select name="viewModel.CodigoTipoAtendimento" required>
+                    @foreach (var item in ViewBag.TiposAtendimento)
+                    {
+                        <option value="@item.CodigoTipoAtendimento" selected="@(item.CodigoTipoAtendimento == 1)">@item.DescricaoTipoAtendimento</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label> Especialidade </label>
+                <select name="viewModel.CodigoEspecialidade" required>
+                    @foreach (var item in ViewBag.Especialidades)
+                    {
+                        <option value="@item.CodigoEspecialidade" selected="@(item.CodigoEspecialidade == 1)">@item.DescricaoEspecialidade</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Sintomas</label>
+                <textarea name="viewModel.Sintomas" rows="7"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Diagnóstico</label>
+                <textarea name="viewModel.Diagnostico" rows="7"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Prescrição</label>
+                <textarea name="viewModel.Prescricao" rows="7"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Observação</label>
+                <textarea name="viewModel.Observacao" rows="7"></textarea>
+            </div>
+
+            <input class="btn-info" type="submit" value="Cadastrar Atendimento" />
+        </form>
+    </div>
+</div>

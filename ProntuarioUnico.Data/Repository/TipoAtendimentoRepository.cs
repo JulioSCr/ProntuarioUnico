@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace ProntuarioUnico.Data.Repository
 {
-    public class EspecialidadeAtendimentoRepository : IEspecialidadeAtendimentoRepository
+    public class TipoAtendimentoRepository : ITipoAtendimentoRepository
     {
         private readonly ProntuarioUnicoContext Context;
 
-        public EspecialidadeAtendimentoRepository()
+        public TipoAtendimentoRepository()
         {
             this.Context = new ProntuarioUnicoContext();
         }
 
-        public List<EspecialidadeAtendimento> ListarAtivos()
+        public List<TipoAtendimento> ListarAtivos()
         {
-            return this.Context.EspecialidadesAtendimento.Where(_ => _.Ativo == true).OrderBy(_ => _.DescricaoEspecialidade).ToList();
+            return this.Context.TiposAtendimento.Where(_ => _.Ativo == true).OrderBy(_ => _. DescricaoTipoAtendimento).ToList();
         }
     }
 }

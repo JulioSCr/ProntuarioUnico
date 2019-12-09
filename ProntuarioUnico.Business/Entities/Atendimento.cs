@@ -15,7 +15,7 @@ namespace ProntuarioUnico.Business.Entities
         public Int32 CodigoTipoAtendimento { get; set; }
         public Int32 CodigoEspecialidade { get; set; }
         public DateTime DataAtendimento { get; set; }
-        public String CodigoToken { get; set; }
+        public String Token { get; set; }
 
         public String Sintomas { get; set; }
         public String Diagnostico { get; set; }
@@ -50,6 +50,13 @@ namespace ProntuarioUnico.Business.Entities
             this.Diagnostico = diagnostico;
             this.Prescricao = prescricao;
             this.Observacao = observacao;
+            this.Ativo = true;
+            this.DataAtualizacao = DateTime.Now;
+        }
+
+        public void AlterarToken(string token)
+        {
+            this.Token = token;
             this.Ativo = true;
             this.DataAtualizacao = DateTime.Now;
         }

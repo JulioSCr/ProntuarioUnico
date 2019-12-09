@@ -16,6 +16,8 @@ namespace ProntuarioUnico.Data.Context
         public DbSet<EspecialidadeAtendimento> EspecialidadesAtendimento { get; set; }
         public DbSet<Atendimento> Atendimentos { get; set; }
         public DbSet<Medico> Medicos { get; set; }
+        public DbSet<TokenAtendimento> Tokens { get; set; }
+        public DbSet<TipoAtendimento> TiposAtendimento { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -24,6 +26,8 @@ namespace ProntuarioUnico.Data.Context
             modelBuilder.Configurations.Add(new EspecialidadeAtendimentoConfig());
             modelBuilder.Configurations.Add(new AtendimentoConfig());
             modelBuilder.Configurations.Add(new MedicoConfig());
+            modelBuilder.Configurations.Add(new TokenAtendimentoConfig());
+            modelBuilder.Configurations.Add(new TipoAtendimentoConfig());
 
             Database.SetInitializer<ProntuarioUnicoContext>(null);
         }

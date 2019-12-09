@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProntuarioUnico.Business.Interfaces.Data
 {
-    public interface IAtendimentoRepository
+    public interface ITipoAtendimentoRepository
     {
-        Atendimento Cadastrar(Atendimento novoAtendimento);
-
-        Atendimento Alterar(Atendimento atendimentoAlterado);
-
-        Atendimento Obter(Int32 numeroAtendimento);
+        List<TipoAtendimento> ListarAtivos();
     }
 }

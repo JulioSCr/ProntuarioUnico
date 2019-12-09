@@ -9,6 +9,6 @@ namespace ProntuarioUnico.Business.Interfaces.Data
 {
     public interface IEspecialidadeAtendimentoRepository
     {
-        List<EspecialidadeAtendimento> Listar();
+        List<EspecialidadeAtendimento> ListarAtivos();
     }
 }

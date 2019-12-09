@@ -15,9 +15,11 @@ namespace ProntuarioUnico.Data.Context.EntityConfig
         {
             ToTable("ESPECIALIDADE_ATENDIMENTO", "DBO");
             HasKey(p => p.CodigoEspecialidade);
-            Property(p => p.CodigoEspecialidade).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(p => p.CodigoEspecialidade).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(p => p.CodigoEspecialidade).HasColumnName("ID_ESPECIALIDADE");
             Property(p => p.DescricaoEspecialidade).HasColumnName("DS_ESPECIALIDADE");
+            Property(p => p.Ativo).HasColumnName("IE_ATIVO");
+            Property(p => p.DataAtualizacao).HasColumnName("DT_ATUALIZACAO");
         }
     }
 }

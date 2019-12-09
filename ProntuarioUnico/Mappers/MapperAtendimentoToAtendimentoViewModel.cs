@@ -1,19 +1,15 @@
 ﻿using AutoMapper;
 using ProntuarioUnico.Business.Entities;
-using ProntuarioUnico.ViewModels;
 using ProntuarioUnico.ViewModels.Atendimento;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 
 namespace ProntuarioUnico.Mappers
 {
-    public class MapperAtendimentoViewModelToAtendimento : Profile
+    public class MapperAtendimentoToAtendimentoViewModel : Profile
     {
-        public MapperAtendimentoViewModelToAtendimento()
+        public MapperAtendimentoToAtendimentoViewModel()
         {
-            CreateMap<AtendimentoViewModel, Atendimento>()
+            CreateMap<Atendimento, AtendimentoViewModel>()
                 .ForMember(model => model.CodigoPessoaFisica, _ => _.MapFrom(viewModel => viewModel.CodigoPessoaFisica))
                 .ForMember(model => model.CodigoTipoAtendimento, _ => _.MapFrom(viewModel => viewModel.CodigoTipoAtendimento))
                 .ForMember(model => model.CodigoEspecialidade, _ => _.MapFrom(viewModel => viewModel.CodigoEspecialidade))
@@ -25,7 +21,7 @@ namespace ProntuarioUnico.Mappers
 
         public override string ProfileName
         {
-            get { return "MapperAtendimentoViewModelToAtendimento"; }
+            get { return "MapperAtendimentoToAtendimentoViewModel"; }
         }
     }
 }
