@@ -11,8 +11,8 @@ namespace ProntuarioUnico.Controllers
     public class LoginController : Controller
     {
         private readonly IPessoaFisicaRepository PessoaFisicaRepository;
-        private Global mobjGlobal = new Global();
         private readonly IMedicoRepository MedicoRepository;
+        private Global mobjGlobal = new Global();
 
         public LoginController(IPessoaFisicaRepository pessoaFisicaRepository, IMedicoRepository medicoRepository)
         {
@@ -105,78 +105,275 @@ namespace ProntuarioUnico.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarPessoaFisica(NovoUsuarioPessoaFisicaViewModel novoUsuario)
+        public JsonResult AutenticarCadastroPF(NovoUsuarioPessoaFisicaViewModel novoUsuario)
         {
-            if (novoUsuario.Valido())
+            //Retorno
+            object lobjException = null;
+            object lobjRetorno = null;
+            //Objetos
+            Exception lexcMensagem = null;
+            // Auxiliar
+            string lstrMsg = "";
+            bool lblnRetorno = false;
+
+            try
             {
-                if (Utils.CPFValido(novoUsuario.CPF))
+                if (novoUsuario.Valido())
                 {
-                    if (!this.PessoaFisicaRepository.CPFExistente(novoUsuario.CPF.Trim().Replace(".", "").Replace("-", "")))
+                    if (Utils.CPFValido(novoUsuario.CPF))
                     {
-                        PessoaFisica novaPessoaFisica = Mapper.Map<NovoUsuarioPessoaFisicaViewModel, PessoaFisica>(novoUsuario);
-                        novaPessoaFisica.CPF = novaPessoaFisica.CPF.Trim().Replace(".", "").Replace("-", "");
-                        novaPessoaFisica.Senha = Utils.Base64Encode(novaPessoaFisica.Senha);
+                        if (!this.PessoaFisicaRepository.CPFExistente(novoUsuario.CPF.Trim().Replace(".", "").Replace("-", "")))
+                        {
+                            PessoaFisica novaPessoaFisica = Mapper.Map<NovoUsuarioPessoaFisicaViewModel, PessoaFisica>(novoUsuario);
+                            novaPessoaFisica.CPF = novaPessoaFisica.CPF.Trim().Replace(".", "").Replace("-", "");
+                            novaPessoaFisica.Senha = Utils.Base64Encode(novaPessoaFisica.Senha);
 
-                        this.PessoaFisicaRepository.Cadastrar(novaPessoaFisica);
+                            this.PessoaFisicaRepository.Cadastrar(novaPessoaFisica);
 
-                        return RedirectToAction("Login", "Login");
+                            lstrMsg = "Pessoa cadastrada com sucesso!";
+                            lblnRetorno = true;
+                        }
+                        else
+                        {
+                            lstrMsg = "Já existe uma pessoa cadastrada com o CPF informado.";
+                        }
                     }
                     else
                     {
-                        return Json("Já existe uma pessoa cadastrada com o CPF informado.");
+                        lstrMsg = "CPF inválido.";
                     }
                 }
                 else
                 {
-                    return Json("CPF inválido.");
+                    lstrMsg = "Existem campos obrigatórios que não foram cadastrados.";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return Json("Existem campos obrigatórios que não foram cadastrados.");
+                if (lexcMensagem == null) { lexcMensagem = ex; }
             }
+            finally
+            {
+                if (lexcMensagem != null)
+                {
+                    lobjException = mobjGlobal.ConverterParaJson(mobjGlobal.CriarException(lexcMensagem, lexcMensagem.Message));
+                    lexcMensagem = null;
+                }
+            }
+
+            
+            lobjRetorno = new
+            {
+                Mensagem = lstrMsg,
+                Cadastro = lblnRetorno
+            };
+
+            return Json(
+                new
+                {
+                    Exception = lobjException,
+                    Retorno = lobjRetorno
+                },
+                "json"
+            );
         }
 
         [HttpPost]
-        public ActionResult RecuperarAcessoPessoaFisica(String cpf)
+        public JsonResult AutenticarRecuperarAcessoPessoaFisica(String cpf)
         {
-            PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(cpf);
+            //Retorno
+            object lobjException = null;
+            //Objetos
+            Exception lexcMensagem = null;
+            // Auxiliar
+            string lstrMsg = "";
+            bool lblnRetorno = false;
+            try
+            {
+                if (!String.IsNullOrEmpty(cpf) && !String.IsNullOrWhiteSpace(cpf) && Utils.CPFValido(cpf))
+                {
+                    PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(cpf);
 
-            if (pessoa == default(PessoaFisica))
-                return Json("CPF informado não encontrado.");
+                    if (pessoa == default(PessoaFisica))
+                        lstrMsg = "CPF informado não encontrado.";
 
-            string codigo = Utils.GenerateRandomNumber();
-            string codigoBase64 = Utils.Base64Encode(codigo);
+                    string codigo = Utils.GenerateRandomNumber();
+                    string codigoBase64 = Utils.Base64Encode(codigo);
 
-            pessoa.Senha = codigoBase64;
-            this.PessoaFisicaRepository.Alterar(pessoa);
+                    pessoa.Senha = codigoBase64;
+                    this.PessoaFisicaRepository.Alterar(pessoa);
 
-            Utils.SendEmail(pessoa.Email, $"Olá, {pessoa.Nome}. Foi realizada a alteração da sua senha anterior. A nova senha é : {codigo}. Você pode realizar o login e alterar sua senha a área de cadastro.", "Recuperação de Senha - Nova senha gerada");
+                    Utils.SendEmail(pessoa.Email, $"Olá, {pessoa.Nome}. Foi realizada a alteração da sua senha anterior. A nova senha é : {codigo}. Você pode realizar o login e alterar sua senha a área de cadastro.", "Recuperação de Senha - Nova senha gerada");
 
-            return RedirectToAction("Login", "Login");
+                    lblnRetorno = true;
+                    lstrMsg = String.Format("Olá, {0}. Foi realizada a alteração da sua senha anterior, acesse o e-mail cadastrado para mais informações!", pessoa.Nome);
+                }
+                else
+                {
+                    lstrMsg = "CPF inválido";
+                }
+            }
+            catch (Exception ex)
+            {
+                if (lexcMensagem == null) { lexcMensagem = ex; }
+            }
+            finally
+            {
+                if (lexcMensagem != null)
+                {
+                    lobjException = mobjGlobal.ConverterParaJson(mobjGlobal.CriarException(lexcMensagem, lexcMensagem.Message));
+                    lexcMensagem = null;
+                }
+            }
+            return Json(
+                new
+                {
+                    Exception = lobjException,
+                    Retorno = new
+                    {
+                        Mensagem = lstrMsg,
+                        Cadastro = lblnRetorno
+                    }
+                },
+                "json"
+            );
+        }
+
+        [HttpPost]
+        public JsonResult AutenticarRecuperarAcessoMedico(String crm)
+        {
+            //Retorno
+            object lobjException = null;
+            //Objetos
+            Exception lexcMensagem = null;
+            // Auxiliar
+            string lstrMsg = "";
+            bool lblnRetorno = false;
+            try
+            {
+                if (!String.IsNullOrEmpty(crm) && !String.IsNullOrWhiteSpace(crm))
+                {
+                    Medico medico = this.MedicoRepository.Obter(crm);
+
+                    if (medico == default(Medico))
+                        lstrMsg = "CRM informado não encontrado.";
+
+                    string codigo = Utils.GenerateRandomNumber();
+                    string codigoBase64 = Utils.Base64Encode(codigo);
+
+                    medico.Senha = codigoBase64;
+                    this.MedicoRepository.Alterar(medico);
+
+                    Utils.SendEmail(medico.Email, $"Olá, {medico.NomeGuerra}. Foi realizada a alteração da sua senha anterior. A nova senha é : {codigo}. Você pode realizar o login e alterar sua senha a área de cadastro.", "Recuperação de Senha - Nova senha gerada");
+
+                    lblnRetorno = true;
+                    lstrMsg = String.Format("Olá, {0}. Foi realizada a alteração da sua senha anterior, acesse o e-mail cadastrado para mais informações!", medico.NomeGuerra);
+                }
+                else
+                {
+                    lstrMsg = "CRM inválido";
+                }
+            }
+            catch (Exception ex)
+            {
+                if (lexcMensagem == null) { lexcMensagem = ex; }
+            }
+            finally
+            {
+                if (lexcMensagem != null)
+                {
+                    lobjException = mobjGlobal.ConverterParaJson(mobjGlobal.CriarException(lexcMensagem, lexcMensagem.Message));
+                    lexcMensagem = null;
+                }
+            }
+            return Json(
+                new
+                {
+                    Exception = lobjException,
+                    Retorno = new
+                    {
+                        Mensagem = lstrMsg,
+                        Cadastro = lblnRetorno
+                    }
+                },
+                "json"
+            );
+        }
+
+        [HttpPost]
+        public JsonResult AutenticaMedico(String vstrCRM, String vstrSenha)
+        {
+            //Retorno
+            object lobjException = null;
+            bool lblnRetorno = false;
+            //Objetos
+            Exception lexcMensagem = null;
+            // Auxiliar
+
+            try
+            {
+                if (!String.IsNullOrEmpty(vstrCRM) && !String.IsNullOrWhiteSpace(vstrCRM) &&
+                    !String.IsNullOrEmpty(vstrSenha) && !String.IsNullOrWhiteSpace(vstrSenha))
+                {
+                    Medico medico = this.MedicoRepository.Obter(vstrCRM);
+
+                    if (medico != default(Medico))
+                    {
+                        //String senhaBase64 = Utils.Base64Encode(usuario.Senha);
+                        String senhaBase64 = vstrSenha;
+
+                        if (medico.Senha.Equals(senhaBase64))
+                        {
+                            UserAuthentication.Login(vstrCRM, medico.Codigo);
+                            lblnRetorno = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (lexcMensagem == null) { lexcMensagem = ex; }
+            }
+            finally
+            {
+                if (lexcMensagem != null)
+                {
+                    lobjException = mobjGlobal.ConverterParaJson(mobjGlobal.CriarException(lexcMensagem, lexcMensagem.Message));
+                    lexcMensagem = null;
+                }
+            }
+            return Json(
+                new
+                {
+                    Exception = lobjException,
+                    Retorno = lblnRetorno
+                },
+                "json"
+            );
         }
 
         [HttpPost]
         public ActionResult LogarMedico(LoginViewModel usuario)
         {
-            if (usuario.Valido())
-            {
-                Medico medico = this.MedicoRepository.Obter(usuario.CPF);
+            //if (usuario.Valido())
+            //{
+            //    Medico medico = this.MedicoRepository.Obter(usuario.CPF);
 
-                if (medico != default(Medico))
-                {
-                    String senhaBase64 = Utils.Base64Encode(usuario.Senha);
+            //    if (medico != default(Medico))
+            //    {
+            //        String senhaBase64 = Utils.Base64Encode(usuario.Senha);
 
-                    if (medico.Senha.Equals(senhaBase64))
-                    {
-                        UserAuthentication.Login(usuario.CPF, medico.Codigo);
+            //        if (medico.Senha.Equals(senhaBase64))
+            //        {
+            //            UserAuthentication.Login(usuario.CPF, medico.Codigo);
 
-                        return RedirectToAction("Index", "Medico");
-                    }
-                }
-            }
+            //            return RedirectToAction("Index", "Medico");
+            //        }
+            //    }
+            //}
 
-            return Json("CRM ou senha inválidos.");
+            //return Json("CRM ou senha inválidos.");
+            return RedirectToAction("Index", "Medico");
         }
 
         [HttpPost]

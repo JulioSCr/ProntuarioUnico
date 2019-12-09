@@ -6,7 +6,7 @@
         <img src="~/Content/Imagens/Shared/imgLogo.png" />
     </div>
     @*Formulário para login*@
-    <form id="frmLogin_Entrar" action="@Url.Action("Logar", "Login")" onsubmit="return Login.Teste()" method="post" style="display: block;">
+    <form id="frmLogin_Entrar" action="@Url.Action("Logar", "Login")" onsubmit="return Login.AutenticarPessoa()" method="post" style="display: block;">
         <div class="form-group">
             <label for="UsuarioCPF">Login</label>
             <input  type="text" class="form-control" id="txtLogin_Login" name="Usuario.CPF" value="@ViewBag.Usuario.CPF" aria-describedby="emailHelp" placeholder="CPF" required>
@@ -34,7 +34,7 @@
         </div>
     </form>
     @*Formulário para recuperação de senha*@
-    <form id="frmLogin_Senha" action="@Url.Action("RecuperarAcesso", "Login")" method="post" style="display: none;">
+    <form id="frmLogin_Senha" action="@Url.Action("RecuperarAcessoPessoaFisica", "Login")" onsubmit="return Login.AutenticarRecuperarAcessoPessoaFisica()" method="post" style="display: none;">
         <div class="form-group">
             <label for="txtLogin_NovaSenha">Login</label>
             <input type="text" class="form-control" id="txtLogin_NovaSenha" name="cpf" aria-describedby="emailHelp" placeholder="Informe seu CPF">
@@ -47,12 +47,12 @@
                 @*Botão para acionar modal*@
                 @*<button id="btnLogin_NovaSenha" type="button" class="btn btn-primary" data-target="#divLogin_ModalRecuperarSenha" data-toggle="modal">Prosseguir</button>*@
 
-                <input type="submit" class="btn btn-primary" value="Prosseguir">
-            </div>
+                <button type="button" onclick="Login.AutenticarRecuperarAcessoPessoaFisica()" class="btn btn-primary" value="Prosseguir">Prosseguir</button>
+</div>
         </div>
     </form>
     @*Formulário para criar conta*@
-    <form id="frmLogin_CriarConta" action="@Url.Action("Cadastrar", "Login")" method="post" style="display: none;">
+    <form id="frmLogin_CriarConta" action="@Url.Action("CadastrarPessoaFisica", "Login")" onsubmit="return Login.CadastrarPessoaFisica()" method="post" style="display: none;">
         <div class="form-group">
             <label for="txtLogin_Nome">Nome</label>
             <input type="text" class="form-control" id="txtLogin_Nome" name="novoUsuario.Nome" aria-describedby="emailHelp" placeholder="Nome completo" required>
@@ -69,7 +69,7 @@
         </div>
         <div class="form-group">
             <label for="txtLogin_Email">E-mail</label>
-            <input type="email" class="form-control" id="txtLogin_Telefone" name="novoUsuario.Email" placeholder="E-mail" required>
+            <input type="email" class="form-control" id="txtLogin_Email" name="novoUsuario.Email" placeholder="E-mail" required>
         </div>
         <div class="form-row">
             <div class=" col-sm-6">
@@ -89,12 +89,12 @@
             </div>
             <div class="col cssLogin_BtnRigth">
                 @*<button id="btnLogin_Salvar" type="submit" class="btn btn-primary">Salvar</button>*@
-                <input type="submit" class="btn btn-primary" value="Cadastrar">
-            </div>
+                <button type="button" onclick="Login.CadastrarPessoaFisica()" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
+</div>
         </div>
     </form>
     @*Login Médico*@
-    <form id="frmLogin_Entrar_Medico" action="@Url.Action("LogarMedico", "Login")" method="post" style="display: none;">
+    <form id="frmLogin_Entrar_Medico" action="@Url.Action("LogarMedico", "Login")" onsubmit="return Login.AutenticarMedico()" method="post" style="display: none;">
         <div class="form-group">
             <label for="UsuarioCPF">Login</label>
             <input type="text" class="form-control" id="LoginCRM" name="Medico.CRM" aria-describedby="emailHelp" placeholder="CRM" required>
@@ -114,14 +114,14 @@
             </div>
             <div class="col cssLogin_BtnRigth">
                 @*<button id="btnLogin_Entrar" type="button" class="btn btn-primary" onclick="Login.Logar()">Entrar</button>*@
-                <button class="btn btn-primary" type="submit" value="Entrar"></button>
+                <button class="btn btn-primary" type="submit" value="Entrar">Entrar</button>
             </div>
         </div>
     </form>
     @*Formulário para recuperação de senha médico*@
     <form id="frmLogin_Senha_Medico" style="display: none;">
         <div class="form-group">
-            <label for="txtLogin_NovaSenha">Login</label>
+            <label for="txtLogin_NovaSenha_Medico">Login</label>
             <input type="text" class="form-control" id="txtLogin_NovaSenha_Medico" name="crm" aria-describedby="emailHelp" placeholder="Informe seu CRM">
         </div>
         <div class="form-row">
@@ -129,7 +129,7 @@
                 <a href="javascript:Login.btnLayoutVoltarMedico_Click()" id="btnLayoutVoltarMedico" class="form-text text-muted cssLogin_BtnVoltar">Voltar</a>
             </div>
             <div class="col cssLogin_BtnRigth">
-                <button type="submit" class="btn btn-primary" value="Prosseguir"></button>
+                <button type="button" onclick="Login.AutenticarRecuperarAcessoMedico()" class="btn btn-primary" value="Prosseguir">Prosseguir</button>
             </div>
         </div>
     </form>
