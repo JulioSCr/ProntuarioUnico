@@ -92,7 +92,7 @@ namespace ProntuarioUnico.Controllers
                 if (pessoa == default(PessoaFisica))
                     return Json("Paciente não encontrado");
 
-                Utils.SendEmail(pessoa.Email, $"No seu atendimento gerado um token de verificação: {codigoToken}", "Atendimento Realizado - Token de Autenticação");
+                Utils.SendEmail(pessoa.Email, $"Olá, {pessoa.Nome}, seu atendimento gerou um token de validação: {codigoToken}", "Atendimento Realizado - Token de Validação");
 
                 ViewBag.CodigoAtendimento = atendimento.NumeroAtendimento;
                 ViewBag.NomePessoa = pessoa.Nome;
@@ -137,7 +137,7 @@ namespace ProntuarioUnico.Controllers
                 if (medico == default(Medico))
                     return Json("Médico não encontrado.");
 
-                Utils.SendEmail(medico.Email, $"Olá {medico.NomeGuerra}. O atendimento #{atendimento.NumeroAtendimento} realizado às {atendimento.DataAtendimento.ToString("HH:mm tt")} do dia {atendimento.DataAtendimento.ToString("dd/MM/yyyy")} foi autenticado com sucesso.", "Atendimento autenticado por Token com sucesso!");
+                Utils.SendEmail(medico.Email, $"Olá {medico.NomeGuerra}, o atendimento #{atendimento.NumeroAtendimento} realizado às {atendimento.DataAtendimento.ToString("HH:mm tt")} do dia {atendimento.DataAtendimento.ToString("dd/MM/yyyy")} foi autenticado com sucesso.", "Atendimento autenticado por Token com sucesso!");
 
                 return RedirectToAction("Index", "Atendimento");
             }
