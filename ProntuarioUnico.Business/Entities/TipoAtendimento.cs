@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProntuarioUnico.Business.Entities
 {
-    public class EspecialidadeAtendimento : BaseEntity
+    public class TipoAtendimento : BaseEntity
     {
-        public Int32 CodigoEspecialidade { get; set; }
-        public String DescricaoEspecialidade { get; set; }
+        public Int32 CodigoTipoAtendimento { get; set; }
+        public String DescricaoTipoAtendimento { get; set; }
 
-        internal EspecialidadeAtendimento()
+        internal TipoAtendimento()
         {
 
         }

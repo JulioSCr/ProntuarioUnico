@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Views/Home/Index.css?" + DateTimeOffset.Now)" />
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/PessoaFisica/Index.js?" + DateTimeOffset.Now)"></script>
+}
+
+<h3>Autenticação do Atendimento - Nome Paciente: @ViewBag.NomePessoa </h3>
+
+<div class="row lign-items-center">
+    <div class="col-md-10">
+        <form action="@Url.Action("ValidarToken", "Atendimento")" method="post">
+            <input type="hidden" name="tokenViewModel.NumeroAtendimento" value="@ViewBag.CodigoAtendimento">
+            <div class="form-group">
+                <label> Código Token </label>
+                <input type="text" name="tokenViewModel.Token" />
+            </div>
+            <input class="btn-info" type="submit" value="Finalizar Atendimento" />
+        </form>
+    </div>
+</div>

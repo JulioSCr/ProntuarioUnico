@@ -47,5 +47,10 @@ namespace ProntuarioUnico.Data.Repository
 
             return atendimento;
         }
+
+        public Atendimento Obter(int numeroAtendimento)
+        {
+            return this.Context.Atendimentos.SingleOrDefault(_ => _.NumeroAtendimento == numeroAtendimento);
+        }
     }
 }
