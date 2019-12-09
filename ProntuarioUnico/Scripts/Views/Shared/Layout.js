@@ -11,6 +11,14 @@ Layout.Sair = function () {
     }
 }
 
+Layout.btnLayout_PrincipalClick = function () {
+    try {
+        Redirecionar(null, 'Atendimento/Index');
+    } catch (ex) {
+        alert(ex);
+    }
+}
+
 window.addEventListener('click', (e) => {
     var lblnExibir = false;
     try {

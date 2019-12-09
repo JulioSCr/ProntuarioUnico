@@ -319,8 +319,7 @@ namespace ProntuarioUnico.Controllers
 
                     if (medico != default(Medico))
                     {
-                        //String senhaBase64 = Utils.Base64Encode(usuario.Senha);
-                        String senhaBase64 = vstrSenha;
+                        String senhaBase64 = Utils.Base64Encode(vstrSenha);
 
                         if (medico.Senha.Equals(senhaBase64))
                         {
