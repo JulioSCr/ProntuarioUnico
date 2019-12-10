@@ -1,8 +1,5 @@
 ﻿using ProntuarioUnico.Business.Entities.Enums;
-using ProntuarioUnico.ViewModels.Login;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Security;
 
@@ -10,10 +7,21 @@ namespace ProntuarioUnico.AuxiliaryClasses
 {
     public static class UserAuthentication
     {
-        public static StatusLogin Login(string login, long codigoInterno)
+        public static StatusLogin LoginPessoaFisica(string login, long codigoInterno)
         {
             FormsAuthentication.SetAuthCookie(login, true);
             HttpContext.Current.Session["usuario"] = login;
+            HttpContext.Current.Session["tipo_usuario"] = "pessoa_fisica";
+            HttpContext.Current.Session["codigo_identificacao"] = Convert.ToString(codigoInterno);
+
+            return StatusLogin.Sucesso;
+        }
+
+        public static StatusLogin LoginMedico(string login, long codigoInterno)
+        {
+            FormsAuthentication.SetAuthCookie(login, true);
+            HttpContext.Current.Session["usuario"] = login;
+            HttpContext.Current.Session["tipo_usuario"] = "medico";
             HttpContext.Current.Session["codigo_identificacao"] = Convert.ToString(codigoInterno);
 
             return StatusLogin.Sucesso;
@@ -29,8 +37,12 @@ namespace ProntuarioUnico.AuxiliaryClasses
 
         public static string ObterCodigoInternoUsuarioLogado()
         {
-            string login = Convert.ToString(HttpContext.Current.Session["codigo_identificacao"]);
-            return login;
+            return Convert.ToString(HttpContext.Current.Session["codigo_identificacao"]);
+        }
+
+        public static string ObterTipoUsuario()
+        {
+            return Convert.ToString(HttpContext.Current.Session["tipo_usuario"]);
         }
     }
 }

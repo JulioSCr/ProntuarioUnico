@@ -22,5 +22,10 @@ namespace ProntuarioUnico.Data.Repository
         {
             return this.Context.EspecialidadesAtendimento.Where(_ => _.Ativo == true).OrderBy(_ => _.DescricaoEspecialidade).ToList();
         }
+
+        public EspecialidadeAtendimento Obter(int codigoEspecialidade)
+        {
+            return this.Context.EspecialidadesAtendimento.SingleOrDefault(_ => _.CodigoEspecialidade == codigoEspecialidade);
+        }
     }
 }

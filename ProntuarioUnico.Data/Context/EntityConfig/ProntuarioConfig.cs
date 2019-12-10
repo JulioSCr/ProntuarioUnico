@@ -23,6 +23,11 @@ namespace ProntuarioUnico.Data.Context.EntityConfig
             Property(p => p.NomeMedico).HasColumnName("NM_MEDICO");
             Property(p => p.Especialidade).HasColumnName("DS_ESPECIALIDADE");
             Property(p => p.Observacoes).HasColumnName("DS_OBSERVACAO");
+            Property(p => p.CodigoTipoAtendimento).HasColumnName("ID_TIPO_ATENDIMENTO");
+            Property(p => p.CodigoEspecialidade).HasColumnName("ID_ESPECIALIDADE");
+            Property(p => p.Sintomas).HasColumnName("DS_SINTOMA");
+            Property(p => p.Diagnostico).HasColumnName("DS_DIAGNOSTICO");
+            Property(p => p.Prescricao).HasColumnName("DS_PRESCRICAO");
         }
     }
 }

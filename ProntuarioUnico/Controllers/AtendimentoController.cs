@@ -88,11 +88,19 @@ namespace ProntuarioUnico.Controllers
                 // Envio de Email para paciente com token de verificação
 
                 PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(atendimento.CodigoPessoaFisica);
+                EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(atendimento.CodigoEspecialidade);
+                Medico medico = this.MedicoRepository.Obter(atendimento.CodigoMedico);
 
                 if (pessoa == default(PessoaFisica))
                     return Json("Paciente não encontrado");
 
-                Utils.SendEmail(pessoa.Email, $"Olá, {pessoa.Nome}, seu atendimento gerou um token de validação: {codigoToken}", "Atendimento Realizado - Token de Validação");
+                if (especialidade == default(EspecialidadeAtendimento))
+                    return Json("Especialidade não encontrado");
+
+                if (medico  == default(Medico))
+                    return Json("Médico não encontrado");
+
+                Utils.SendEmail(pessoa.Email, $"Olá, {pessoa.Nome}, seu atendimento realidado com o(a) Dr(a). {medico.NomeGuerra} da especialidade {especialidade.DescricaoEspecialidade} realidado dia {atendimento.DataAtendimento.ToString("dd/MM/yyyy HH:mm:ss")} gerou um token de validação: {codigoToken}", $" #{atendimento.NumeroAtendimento} Atendimento Realizado");
 
                 ViewBag.CodigoAtendimento = atendimento.NumeroAtendimento;
                 ViewBag.NomePessoa = pessoa.Nome;

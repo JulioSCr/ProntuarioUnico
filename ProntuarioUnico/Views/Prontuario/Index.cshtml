@@ -1,0 +1,124 @@
+﻿@using ProntuarioUnico.ViewModels
+@model ProntuarioViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Views/Home/Index.css?" + DateTimeOffset.Now)" />
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/PessoaFisica/Index.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Views/Home/Index.js?" + DateTimeOffset.Now)"></script>
+}
+
+
+<div class="row lign-items-center">
+    <div class="col-md-10">
+        <form action="@Url.Action("BuscarAtendimentos", "Prontuario")" method="get">
+            <div class="form-group">
+                <label> Data Início </label>
+                <input type="date" class="form-control" name="filtro.DataInicial" value="@(ViewBag.DataInicial == null ? "": ViewBag.DataInicial.ToString("yyyy-MM-dd"))">
+            </div>
+            <div class="form-group">
+                <label> Data Fim </label>
+                <input type="date" class="form-control" name="filtro.DataFinal" value="@(ViewBag.DataFinal == null? "": ViewBag.DataFinal.ToString("yyyy-MM-dd"))">
+            </div>
+            <div class="form-group">
+                <label> Código do Atendimento </label>
+                <input type="number" class="form-control" name="filtro.NumeroAtendimento" value="@(ViewBag.NumeroAtendimento == null? "" :ViewBag.NumeroAtendimento)" />
+            </div>
+            <div class="form-group">
+                <label> Tipo de Atendimento </label>
+                <select name="filtro.CodigoTipoAtendimento" required>
+                    <option value="null" @(ViewBag.CodigoTipoAtendimento == null ? "selected" : "")> Todos </option>
+                    @foreach (var item in ViewBag.TiposAtendimento)
+                    {
+                        <option value="@item.CodigoTipoAtendimento" selected="@(ViewBag.CodigoTipoAtendimento != null && ViewBag.CodigoTipoAtendimento==item.CodigoTipoAtendimento)">@item.DescricaoTipoAtendimento</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label> Especialidade </label>
+                <select name="filtro.CodigoEspecialidade" required>
+                    <option value="null" @(ViewBag.CodigoEspecialidade == null ? "selected" : "")> Todos </option>
+                    @foreach (var item in ViewBag.Especialidades)
+                    {
+                        <option value="@item.CodigoEspecialidade" selected="@(ViewBag.CodigoEspecialidade != null && ViewBag.CodigoEspecialidade==item.CodigoEspecialidade)">@item.DescricaoEspecialidade</option>
+                    }
+                </select>
+            </div>
+            <input class="btn-info" type="submit" value="Buscar" />
+        </form>
+
+        @* Tabela *@
+        @if (Model.Prontuarios != null)
+        {
+            <div id="divIndex_ContainerTabela">
+                @if (Model.Prontuarios.Any())
+                {
+                    <table id="tblIndex_TbProntuario">
+                        <thead>
+                            <tr>
+                                <th>Nr. Atendimento</th>
+                                <th>Atendimento</th>
+                                <th>Dt. Atendimento</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var atendimento in Model.Prontuarios)
+                            {
+                                <tr class="cssIndex_TbProntuario_Row">
+                                    <td>@atendimento.NumeroAtendimento</td>
+                                    <td>@atendimento.TipoAtendimento</td>
+                                    <td>@atendimento.DataAtendimento</td>
+                                    <td>
+                                        <button>
+                                            <img src="@Url.Content("~/Content/Imagens/Home/imgDown.png")" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="cssIndex_TbProntuario_Row_Descricao">
+                                    <td colspan="4">
+                                        <div>
+                                            <h2>Especialista:</h2>
+                                            <p>@atendimento.NomeMedico</p>
+
+                                            <h2>Especialidade:</h2>
+                                            <p>@atendimento.Especialidade</p>
+
+                                            <h2>Sintomas:</h2>
+                                            <p>@atendimento.Sintomas</p>
+
+                                            <h2>Diagnóstico:</h2>
+                                            <p>@atendimento.Diagnostico</p>
+
+                                            <h2>Prescrição:</h2>
+                                            <p>@atendimento.Prescricao</p>
+
+                                            <h2>Observacões:</h2>
+                                            <p>@atendimento.Observacoes</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table id="tblIndex_TbProntuario">
+                        <tbody>
+                            <tr class="text-center">
+                                <td colspan="4"> Nenhum atendimento encontrado </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        }
+    </div>
+</div>

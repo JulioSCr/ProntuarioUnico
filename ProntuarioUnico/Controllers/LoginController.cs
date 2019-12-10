@@ -52,7 +52,7 @@ namespace ProntuarioUnico.Controllers
 
                         if (pessoa.Senha.Equals(senhaBase64))
                         {
-                            UserAuthentication.Login(vstrCPF, pessoa.Codigo);
+                            UserAuthentication.LoginPessoaFisica(vstrCPF, pessoa.Codigo);
                             lblnRetorno = true;
                         }
                     }
@@ -101,7 +101,7 @@ namespace ProntuarioUnico.Controllers
             //}
 
             //return Json("CPF ou senha inválidos.");
-            return RedirectToAction("Index", "PessoaFisica");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -323,7 +323,7 @@ namespace ProntuarioUnico.Controllers
 
                         if (medico.Senha.Equals(senhaBase64))
                         {
-                            UserAuthentication.Login(vstrCRM, medico.Codigo);
+                            UserAuthentication.LoginMedico(vstrCRM, medico.Codigo);
                             lblnRetorno = true;
                         }
                     }

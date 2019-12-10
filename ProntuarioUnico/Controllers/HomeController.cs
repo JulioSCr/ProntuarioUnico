@@ -10,21 +10,38 @@ namespace ProntuarioUnico.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProntuarioRepository ProntuarioRepository;
+        private readonly IPessoaFisicaRepository PessoaFisicaRepository;
+        private readonly IMedicoRepository MedicoRepository;
 
-        public HomeController(IProntuarioRepository prontuarioRepository)
+        public HomeController(IPessoaFisicaRepository pessoaFisicaRepository, IMedicoRepository medicoRepository)
         {
-            this.ProntuarioRepository = prontuarioRepository;
+            this.PessoaFisicaRepository = pessoaFisicaRepository;
+            this.MedicoRepository = medicoRepository;
         }
 
         public ActionResult Index()
         {
             string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
+            string tipoUsuario = UserAuthentication.ObterTipoUsuario();
 
-            List<Prontuario> prontuarios = this.ProntuarioRepository.Listar(Convert.ToInt32(codigo));
-            ProntuarioViewModel model = new ProntuarioViewModel(prontuarios);
+            if(tipoUsuario == "pessoa_fisica")
+            {
+                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(Convert.ToInt32(codigo));
 
-            return View(model);
+                ViewBag.TipoUsuario = tipoUsuario;
+                ViewBag.NomeUsuario = pessoa.Nome;
+                ViewBag.NomePagina = $"Olá, {pessoa.Nome}";
+            }
+            else
+            {
+                Medico medico= this.MedicoRepository.Obter(Convert.ToInt32(codigo));
+
+                ViewBag.TipoUsuario = tipoUsuario;
+                ViewBag.NomeUsuario = medico.NomeGuerra;
+                ViewBag.NomePagina = $"Olá, {medico.NomeGuerra}";
+            }
+                    
+            return View();
         }
     }
 }

@@ -11,15 +11,22 @@ namespace ProntuarioUnico.Controllers
     public class PessoaFisicaController : Controller
     {
         private readonly IPessoaFisicaRepository PessoaFisicaRepository;
+        private readonly IMedicoRepository MedicoRepository;
 
-        public PessoaFisicaController(IPessoaFisicaRepository pessoaFisicaRepository)
+        public PessoaFisicaController(IPessoaFisicaRepository pessoaFisicaRepository, IMedicoRepository medicoRepository)
         {
             this.PessoaFisicaRepository = pessoaFisicaRepository;
+            this.MedicoRepository = medicoRepository;
+
+            CarregarDados();
+            ViewBag.NomePagina = "Informações Pessoais";
         }
 
         // GET: PessoaFisica
         public ActionResult Index()
         {
+            
+
             string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
 
             PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(Convert.ToInt32(codigo));
@@ -51,6 +58,27 @@ namespace ProntuarioUnico.Controllers
             }
 
             return RedirectToAction("Index", "PessoaFisica");
+        }
+
+        private void CarregarDados()
+        {
+            string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
+            string tipoUsuario = UserAuthentication.ObterTipoUsuario();
+
+            if (tipoUsuario == "pessoa_fisica")
+            {
+                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(Convert.ToInt32(codigo));
+
+                ViewBag.TipoUsuario = tipoUsuario;
+                ViewBag.NomeUsuario = pessoa.Nome;
+            }
+            else
+            {
+                Medico medico = this.MedicoRepository.Obter(Convert.ToInt32(codigo));
+
+                ViewBag.TipoUsuario = tipoUsuario;
+                ViewBag.NomeUsuario = medico.NomeGuerra;
+            }
         }
     }
 }

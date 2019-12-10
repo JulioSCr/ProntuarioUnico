@@ -3,6 +3,7 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 @section head {
@@ -12,103 +13,3 @@
 @section scripts {
     <script src="@Url.Content("~/Scripts/Views/Home/Index.js?" + DateTimeOffset.Now)"></script>
 }
-
-@*Fitro*@
-<div class="cssIndex_Filtro">
-    <h1 class="cssIndex_Label">Filtros</h1>
-    <button id="btnIndex_Accordion">
-        <img class="cssAberto" src="@Url.Content("~/Content/Imagens/InserirAtendimento/add.png")" />
-    </button>
-</div>
-<div class="cssIndex_Filtro_Container">
-    <form id="frmIndex_Filtro">
-        <div class="form-row">
-            <div class=" col-sm-2">
-                <label class="cssIndex_lblFiltros" for="txtIndex_CPF">Nr Atendimento</label>
-                <input type="text" class="form-control" id="txtIndex_CPF" aria-describedby="emailHelp" placeholder="Nr Atendimento">
-            </div>
-            <div class="col-sm-3">
-                <label class="cssIndex_lblFiltros" for="txtIndex_Nome">Atendimento</label>
-                <input type="text" class="form-control" id="txtIndex_Nome" placeholder="Nome" required>
-            </div>
-            <div class="col-sm-4">
-                <label class="cssIndex_lblFiltros" for="txtIndex_Nome">Médico</label>
-                <input type="text" class="form-control" id="txtIndex_Nome" placeholder="Nome" required>
-            </div>
-            <div class="col-sm-3">
-                <label class="cssIndex_lblFiltros" for="txtIndex_Nome">CRM Médico</label>
-                <input type="text" class="form-control" id="txtIndex_Nome" placeholder="CRM" required>
-            </div>
-        </div>
-        <br />
-        <div class="form-row">
-            <div class=" col-sm-3">
-                <label class="cssIndex_lblFiltros" for="txtIndex_CPF">Especialidade</label>
-                <input type="text" class="form-control" id="txtIndex_CPF" aria-describedby="emailHelp" placeholder="Nome">
-            </div>
-            <div class="col-sm-3">
-                <label class="cssIndex_lblFiltros" for="txtIndex_Nome">De</label>
-                <input type="date" class="form-control" id="txtIndex_Nome" placeholder="" required>
-            </div>
-            <div class="col-sm-3">
-                <label class="cssIndex_lblFiltros" for="txtIndex_Nome">Até</label>
-                <input type="date" class="form-control" id="txtIndex_Nome" placeholder="" required>
-            </div>
-        </div>
-        <br />
-        <button id="btnIndex_Procurar" type="button" class="btn btn-primary">Pesquisar</button>
-    </form>
-</div>
-@* Tabela *@
-<div id="divIndex_ContainerTabela">
-    @if (Model.Prontuarios.Any())
-    {
-        <table id="tblIndex_TbProntuario">
-            <thead>
-                <tr>
-                    <th>Nr. Atendimento</th>
-                    <th>Atendimento</th>
-                    <th>Dt. Atendimento</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var atendimento in Model.Prontuarios)
-                {
-                    <tr class="cssIndex_TbProntuario_Row">
-                        <td>@atendimento.NumeroAtendimento</td>
-                        <td>@atendimento.TipoAtendimento</td>
-                        <td>@atendimento.DataAtendimento</td>
-                        <td>
-                            <button>
-                                <img src="@Url.Content("~/Content/Imagens/Home/imgDown.png")" />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="cssIndex_TbProntuario_Row_Descricao">
-                        <td colspan="4">
-                            <div>
-                                <h2>Especialista:</h2>
-                                <p>@atendimento.NomeMedico</p>
-                                <h2>Especialidade:</h2>
-                                <p>@atendimento.Especialidade</p>
-                                <h2>Observações:</h2>
-                                <p>@atendimento.Observacoes</p>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <table id="tblIndex_TbProntuario">
-            <tbody>
-                <tr class="text-center">
-                    <td colspan="4"> Nenhum atendimento encontrado </td>
-                </tr>
-            </tbody>
-        </table>
-    }
-</div>

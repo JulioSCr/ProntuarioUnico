@@ -2,6 +2,7 @@
 
 @{
     ProntuarioUnico.Global mobjGlobal = new ProntuarioUnico.Global();
+    string controllerName = Convert.ToString(this.ViewContext.RouteData.Values["controller"]);
 }
 
 <html>
@@ -21,21 +22,39 @@
     @* Cabeçalho *@
     <header id="hdrLayout_Cabecalho">
         <h1 id="Principal">
-            <a href="#">
+            <a href="@Url.Action("Index", "Home")">
                 <img id="imgLayout_Logo" src="~/Content/Imagens/Shared/imgLogo.png" />
             </a>
         </h1>
         <nav id="navLayout_Cabecalho" role="navigation">
             <ul id="lstLayout_Menu">
-                <li>
-                    <a class="click-especial" href="javascript:Layout.AbrirProntuario()">Prontuário</a>
-                </li>
-                <li>
-                    <a class="click-especial" href="#">Link</a>
-                </li>
-                <li>
-                    <a id="btnLayout_Principal" href="javascript:Layout.btnLayout_PrincipalClick()">Atendimento</a>
-                </li>
+                @if (ViewBag.TipoUsuario.Trim() == "pessoa_fisica")
+                {
+                    <li>
+                        @if (controllerName.Trim().Equals("Prontuario"))
+                        {
+                            <a id="btnLayout_Principal" class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
+                        }
+                        else
+                        {
+                            <a class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
+                        }
+                    </li>
+                }
+
+                @if (ViewBag.TipoUsuario.Trim() == "medico")
+                {
+                    <li>
+                        @if (controllerName.Trim().Equals("Atendimento"))
+                        {
+                            <a id="btnLayout_Principal" class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
+                        }
+                        else
+                        {
+                            <a class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
+                        }
+                    </li>
+                }
             </ul>
             <div class="cssLayout_Dropdown_Menu">
                 <button id="btnMenu">
@@ -43,7 +62,7 @@
                 </button>
                 <ul id="divLayout_ContentMenu">
                     <li class="cssLayout_ContextMenu__Item">
-                        <a href="#">Meu Perfil</a>
+                        <a href="@Url.Action("Index", "PessoaFisica")">Meu Perfil</a>
                     </li>
                     <li class="cssLayout_ContextMenu__Separador"></li>
                     <li class="cssLayout_ContextMenu__Item">
@@ -59,7 +78,7 @@
             @* Título da página *@
             <div id="divLayout_Titulo">
                 <div></div>
-                <label></label>
+                <label>@ViewBag.NomePagina</label>
             </div>
             @RenderBody()
         </div>

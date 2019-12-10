@@ -10,11 +10,16 @@ namespace ProntuarioUnico.ViewModels
     {
         public List<Prontuario> Prontuarios { get; set; }
 
+        public ProntuarioViewModel()
+        {
+
+        }
+
         public ProntuarioViewModel(List<Prontuario> prontuarios)
         {
             if (prontuarios != null && prontuarios.Any())
             {
-                this.Prontuarios = prontuarios;
+                this.Prontuarios = prontuarios.OrderByDescending(_ => _.DataAtendimento).ToList();
             }
             else
             {
