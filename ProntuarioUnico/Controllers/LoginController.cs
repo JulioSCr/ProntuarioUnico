@@ -103,7 +103,7 @@ namespace ProntuarioUnico.Controllers
             //}
 
             //return Json("CPF ou senha inválidos.");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Prontuario");
         }
 
         [HttpPost]
