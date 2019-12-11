@@ -22,5 +22,10 @@ namespace ProntuarioUnico.Data.Repository
         {
             return this.Context.TiposAtendimento.Where(_ => _.Ativo == true).OrderBy(_ => _. DescricaoTipoAtendimento).ToList();
         }
+
+        public TipoAtendimento Obter(int codigo)
+        {
+            return this.Context.TiposAtendimento.SingleOrDefault(_ => _.CodigoTipoAtendimento == codigo);
+        }
     }
 }

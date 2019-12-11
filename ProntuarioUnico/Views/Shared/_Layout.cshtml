@@ -31,28 +31,14 @@
                 @if (ViewBag.TipoUsuario.Trim() == "pessoa_fisica")
                 {
                     <li>
-                        @if (controllerName.Trim().Equals("Prontuario"))
-                        {
-                            <a id="btnLayout_Principal" class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
-                        }
-                        else
-                        {
-                            <a class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
-                        }
+                        <a id=@(controllerName.Trim().Equals("Prontuario") ? "btnLayout_Principal" : "") class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
                     </li>
                 }
 
                 @if (ViewBag.TipoUsuario.Trim() == "medico")
                 {
                     <li>
-                        @if (controllerName.Trim().Equals("Atendimento"))
-                        {
-                            <a id="btnLayout_Principal" class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
-                        }
-                        else
-                        {
-                            <a class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
-                        }
+                        <a id=@(controllerName.Trim().Equals("Atendimento") ? "btnLayout_Principal" : "") class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
                     </li>
                 }
             </ul>
@@ -62,11 +48,11 @@
                 </button>
                 <ul id="divLayout_ContentMenu">
                     <li class="cssLayout_ContextMenu__Item">
-                        <a href="@Url.Action("Index", "PessoaFisica")">Meu Perfil</a>
+                        <a href=@(ViewBag.TipoUsuario.Trim() == "pessoa_fisica"? Url.Action("Index", "PessoaFisica"): Url.Action("Index", "Medico"))>Meu Perfil</a>
                     </li>
                     <li class="cssLayout_ContextMenu__Separador"></li>
                     <li class="cssLayout_ContextMenu__Item">
-                        <a href="javascript:Layout.Sair()">Sair</a>
+                        <a href="@Url.Action("Login", "Login")">Sair</a>
                     </li>
                 </ul>
             </div>

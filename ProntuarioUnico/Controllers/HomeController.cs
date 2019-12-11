@@ -1,6 +1,7 @@
 ﻿using ProntuarioUnico.AuxiliaryClasses;
 using ProntuarioUnico.Business.Entities;
 using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.Filters;
 using ProntuarioUnico.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ProntuarioUnico.Controllers
 {
+    [AutorizacaoFilter]
     public class HomeController : Controller
     {
         private readonly IPessoaFisicaRepository PessoaFisicaRepository;
@@ -24,23 +26,20 @@ namespace ProntuarioUnico.Controllers
             string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
             string tipoUsuario = UserAuthentication.ObterTipoUsuario();
 
-            if(tipoUsuario == "pessoa_fisica")
+            if (tipoUsuario == "pessoa_fisica")
             {
                 PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(Convert.ToInt32(codigo));
 
-                ViewBag.TipoUsuario = tipoUsuario;
                 ViewBag.NomeUsuario = pessoa.Nome;
                 ViewBag.NomePagina = $"Olá, {pessoa.Nome}";
             }
             else
             {
-                Medico medico= this.MedicoRepository.Obter(Convert.ToInt32(codigo));
+                Medico medico = this.MedicoRepository.Obter(Convert.ToInt32(codigo));
 
-                ViewBag.TipoUsuario = tipoUsuario;
-                ViewBag.NomeUsuario = medico.NomeGuerra;
                 ViewBag.NomePagina = $"Olá, {medico.NomeGuerra}";
             }
-                    
+
             return View();
         }
     }

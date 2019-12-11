@@ -1,8 +1,12 @@
-﻿using ProntuarioUnico.AuxiliaryClasses;
+﻿using AutoMapper;
+using Microsoft.Reporting.WebForms;
+using ProntuarioUnico.AuxiliaryClasses;
 using ProntuarioUnico.Business.Entities;
 using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.Filters;
 using ProntuarioUnico.ViewModels;
 using ProntuarioUnico.ViewModels.Filtros;
+using ProntuarioUnico.ViewModels.Relatorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +15,7 @@ using System.Web.Mvc;
 
 namespace ProntuarioUnico.Controllers
 {
+    [AutorizacaoFilter]
     public class ProntuarioController : Controller
     {
         private readonly ITipoAtendimentoRepository TipoAtendimentoRepository;
@@ -28,7 +33,7 @@ namespace ProntuarioUnico.Controllers
             this.PessoaFisicaRepository = pessoaFisicaRepository;
             this.MedicoRepository = medicoRepository;
 
-            CarregarDados();
+            ViewBag.NomePagina = $"Consulta de Prontuário - {UserAuthentication.ObterNome()}";
         }
 
         // GET: Prontuario
@@ -59,30 +64,81 @@ namespace ProntuarioUnico.Controllers
                 return View("Index", model);
             }
 
-
             return Json("Datas inseridas inválidas.");
         }
 
-        private void CarregarDados()
+        public ActionResult ImprimirPDF(FiltroProntuarioViewModel filtro)
         {
-            string codigo = UserAuthentication.ObterCodigoInternoUsuarioLogado();
-            string tipoUsuario = UserAuthentication.ObterTipoUsuario();
-
-            if (tipoUsuario == "pessoa_fisica")
+            if (filtro.Valido())
             {
-                PessoaFisica pessoa = this.PessoaFisicaRepository.Obter(Convert.ToInt32(codigo));
+                List<Prontuario> prontuarios = this.ProntuarioRepository.Listar(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
+                List<AtendimentoPDFView> atendimentos = Mapper.Map<List<Prontuario>, List<AtendimentoPDFView>>(prontuarios);
 
-                ViewBag.TipoUsuario = tipoUsuario;
-                ViewBag.NomeUsuario = pessoa.Nome;
-                ViewBag.NomePagina = $"Consulta de Prontuário - {pessoa.Nome}";
-            }
-            else
-            {
-                Medico medico = this.MedicoRepository.Obter(Convert.ToInt32(codigo));
+                LocalReport relatorio = new LocalReport();
+                relatorio.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\ReportProntuario.rdlc";
+                relatorio.DataSources.Add(new ReportDataSource("Prontuario", atendimentos));
 
-                ViewBag.TipoUsuario = tipoUsuario;
-                ViewBag.NomeUsuario = medico.NomeGuerra;
+                //parametros
+                relatorio.SetParameters(new ReportParameter("DataImpressao", DateTime.Now.ToString("dd/MM/yyyy")));
+                relatorio.SetParameters(new ReportParameter("Nome", UserAuthentication.ObterNome()));
+                relatorio.SetParameters(new ReportParameter("Periodo", $"{filtro.DataInicial.ToString("dd/MM/yyyy")} a {filtro.DataFinal.ToString("dd/MM/yyyy")}"));
+
+                string descricao = "Todos";
+
+                if (filtro.CodigoTipoAtendimento.HasValue)
+                {
+                    TipoAtendimento tipo = this.TipoAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
+
+                    if (tipo == default(TipoAtendimento))
+                    {
+                        descricao = tipo.DescricaoTipoAtendimento;
+                    }
+                }
+
+                relatorio.SetParameters(new ReportParameter("Atendimento", descricao));
+                descricao = "Todos";
+
+                if (filtro.CodigoTipoAtendimento.HasValue)
+                {
+                    EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
+
+                    if (especialidade == default(EspecialidadeAtendimento))
+                    {
+                        descricao = especialidade.DescricaoEspecialidade;
+                    }
+                }
+
+                relatorio.SetParameters(new ReportParameter("Especialidade", descricao));
+
+                return GerarArquivoPDF(relatorio);
             }
+
+            return View("BuscarAtendimentos", filtro);
+        }
+
+        private FileContentResult GerarArquivoPDF(LocalReport relatorio)
+        {
+            String reportType = "PDF";
+            String mimeType;
+            String encoding;
+            String fileNameExtension;
+            String deviceInfo;
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            deviceInfo = "<DeviceInfo>" + "  <OutputFormat>" + reportType + "</OutputFormat>" + "</DeviceInfo>";
+
+            renderedBytes = relatorio.Render(
+            reportType,
+            deviceInfo,
+            out mimeType,
+            out encoding,
+            out fileNameExtension,
+            out streams,
+            out warnings);
+
+            return File(renderedBytes, mimeType);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace ProntuarioUnico.Data.Repository
                 prontuarios = prontuarios.Where(_ => _.CodigoTipoAtendimento == cdTipoAtendimento).ToList();
             }
 
-            return prontuarios;
+            return prontuarios.OrderByDescending(_ =>_.DataAtendimento).ToList();
         }
     }
 }

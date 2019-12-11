@@ -113,6 +113,18 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -214,6 +226,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AuxiliaryClasses\ActionResult\StatusRedirectResult.cs" />
     <Compile Include="AuxiliaryClasses\UserAuthentication.cs" />
     <Compile Include="AuxiliaryClasses\Utils.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -237,6 +250,7 @@
     <Compile Include="Mappers\MapperNovoUsuarioViewModelToPessoaFisica.cs" />
     <Compile Include="Mappers\MapperPessoaFisicaToPessoaFisicaViewModel.cs" />
     <Compile Include="Mappers\MapperPessoaFisicaViewModelToPessoaFisica.cs" />
+    <Compile Include="Mappers\MapperProntuarioToAtendimentoPDFView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Atendimento\AtendimentoViewModel.cs" />
     <Compile Include="ViewModels\Atendimento\TokenViewModel.cs" />
@@ -247,6 +261,7 @@
     <Compile Include="ViewModels\MedicoViewModel.cs" />
     <Compile Include="ViewModels\PessoaFisicaViewModel.cs" />
     <Compile Include="ViewModels\ProntuarioViewModel.cs" />
+    <Compile Include="ViewModels\Relatorio\AtendimentoPDFView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Imagens\Home\imgDown.png" />
@@ -322,6 +337,7 @@
     <Content Include="Scripts\Libs\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Libs\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Libs\Global\Global.js" />
+    <Content Include="Reports\ReportProntuario.rdlc" />
     <None Include="Scripts\Libs\Jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.js" />
     <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.min.js" />

@@ -23,6 +23,8 @@ namespace ProntuarioUnico.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            UserAuthentication.Logoff();
+
             ViewBag.Usuario = new LoginViewModel();
             ViewBag.NovoUsuario = new NovoUsuarioPessoaFisicaViewModel();
 
@@ -52,7 +54,7 @@ namespace ProntuarioUnico.Controllers
 
                         if (pessoa.Senha.Equals(senhaBase64))
                         {
-                            UserAuthentication.LoginPessoaFisica(vstrCPF, pessoa.Codigo);
+                            UserAuthentication.LoginPessoaFisica(vstrCPF, pessoa.Codigo, pessoa.Nome);
                             lblnRetorno = true;
                         }
                     }
@@ -323,7 +325,7 @@ namespace ProntuarioUnico.Controllers
 
                         if (medico.Senha.Equals(senhaBase64))
                         {
-                            UserAuthentication.LoginMedico(vstrCRM, medico.Codigo);
+                            UserAuthentication.LoginMedico(vstrCRM, medico.Codigo, medico.NomeGuerra);
                             lblnRetorno = true;
                         }
                     }

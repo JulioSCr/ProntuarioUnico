@@ -13,6 +13,8 @@ namespace ProntuarioUnico.Business.Interfaces.Data
 
         Atendimento Alterar(Atendimento atendimentoAlterado);
 
+        Atendimento AlterarToken(Atendimento atendimentoAlterado);
+
         Atendimento Obter(Int32 numeroAtendimento);
     }
 }

@@ -36,6 +36,23 @@ namespace ProntuarioUnico.Data.Repository
             return atendimento;
         }
 
+        public Atendimento AlterarToken(Atendimento atendimentoAlterado)
+        {
+            int numeroAtendimento = atendimentoAlterado.NumeroAtendimento;
+            Atendimento atendimento = this.Context.Atendimentos.SingleOrDefault(_ => _.NumeroAtendimento == numeroAtendimento);
+
+            if (atendimento == default(Atendimento))
+                throw new Exception("Atendimento não encontrada");
+
+            atendimento.AlterarToken(atendimentoAlterado.Token);
+
+            var entry = Context.Entry(atendimento);
+            entry.State = EntityState.Modified;
+            this.Context.SaveChanges();
+
+            return atendimento;
+        }
+
         public Atendimento Cadastrar(Atendimento novoAtendimento)
         {
             Atendimento atendimento = new Atendimento(novoAtendimento.CodigoPessoaFisica, novoAtendimento.CodigoMedico, novoAtendimento.CodigoTipoAtendimento, 

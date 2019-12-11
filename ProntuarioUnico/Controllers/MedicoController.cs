@@ -2,6 +2,7 @@
 using ProntuarioUnico.AuxiliaryClasses;
 using ProntuarioUnico.Business.Entities;
 using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.Filters;
 using ProntuarioUnico.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ProntuarioUnico.Controllers
 {
+    [AutorizacaoFilter]
     public class MedicoController : Controller
     {
         private readonly IMedicoRepository MedicoRepository;

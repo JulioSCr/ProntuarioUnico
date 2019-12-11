@@ -2,6 +2,7 @@
 using ProntuarioUnico.AuxiliaryClasses;
 using ProntuarioUnico.Business.Entities;
 using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.Filters;
 using ProntuarioUnico.ViewModels;
 using ProntuarioUnico.ViewModels.Atendimento;
 using System;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ProntuarioUnico.Controllers
 {
+    [AutorizacaoFilter]
     public class AtendimentoController : Controller
     {
         private readonly IAtendimentoRepository AtendimentoRepository;
@@ -139,6 +141,9 @@ namespace ProntuarioUnico.Controllers
 
                 if (atendimento == default(Atendimento))
                     return Json("Atendimento não encontrado.");
+
+                atendimento.Token = tokenBase64;
+                this.AtendimentoRepository.AlterarToken(atendimento);
 
                 Medico medico = this.MedicoRepository.Obter(atendimento.CodigoMedico);
 

@@ -2,12 +2,14 @@
 using ProntuarioUnico.AuxiliaryClasses;
 using ProntuarioUnico.Business.Entities;
 using ProntuarioUnico.Business.Interfaces.Data;
+using ProntuarioUnico.Filters;
 using ProntuarioUnico.ViewModels;
 using System;
 using System.Web.Mvc;
 
 namespace ProntuarioUnico.Controllers
 {
+    [AutorizacaoFilter]
     public class PessoaFisicaController : Controller
     {
         private readonly IPessoaFisicaRepository PessoaFisicaRepository;

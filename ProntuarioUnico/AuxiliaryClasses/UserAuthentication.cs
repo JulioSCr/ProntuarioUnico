@@ -7,21 +7,23 @@ namespace ProntuarioUnico.AuxiliaryClasses
 {
     public static class UserAuthentication
     {
-        public static StatusLogin LoginPessoaFisica(string login, long codigoInterno)
+        public static StatusLogin LoginPessoaFisica(string login, long codigoInterno, string nome)
         {
             FormsAuthentication.SetAuthCookie(login, true);
             HttpContext.Current.Session["usuario"] = login;
             HttpContext.Current.Session["tipo_usuario"] = "pessoa_fisica";
+            HttpContext.Current.Session["nome"] = nome;
             HttpContext.Current.Session["codigo_identificacao"] = Convert.ToString(codigoInterno);
 
             return StatusLogin.Sucesso;
         }
 
-        public static StatusLogin LoginMedico(string login, long codigoInterno)
+        public static StatusLogin LoginMedico(string login, long codigoInterno, string nome)
         {
             FormsAuthentication.SetAuthCookie(login, true);
             HttpContext.Current.Session["usuario"] = login;
             HttpContext.Current.Session["tipo_usuario"] = "medico";
+            HttpContext.Current.Session["nome"] = nome;
             HttpContext.Current.Session["codigo_identificacao"] = Convert.ToString(codigoInterno);
 
             return StatusLogin.Sucesso;
@@ -43,6 +45,11 @@ namespace ProntuarioUnico.AuxiliaryClasses
         public static string ObterTipoUsuario()
         {
             return Convert.ToString(HttpContext.Current.Session["tipo_usuario"]);
+        }
+
+        public static string ObterNome()
+        {
+            return Convert.ToString(HttpContext.Current.Session["nome"]);
         }
     }
 }

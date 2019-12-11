@@ -12,6 +12,7 @@
 @section scripts {
     <script src="@Url.Content("~/Scripts/Views/PessoaFisica/Index.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Views/Home/Index.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Views/Home/Index.js?" + DateTimeOffset.Now)"></script>
 }
 
 
@@ -52,10 +53,20 @@
             </div>
             <input class="btn-info" type="submit" value="Buscar" />
         </form>
-
         @* Tabela *@
         @if (Model.Prontuarios != null)
         {
+
+            <form action="@Url.Action("ImprimirPDF", "Prontuario")" method="get" target="_blank">
+
+                <input type="hidden" class="form-control" name="filtro.DataInicial" value="@(ViewBag.DataInicial == null ? "": ViewBag.DataInicial.ToString("yyyy-MM-dd"))">
+                <input type="hidden" class="form-control" name="filtro.DataFinal" value="@(ViewBag.DataFinal == null? "": ViewBag.DataFinal.ToString("yyyy-MM-dd"))">
+                <input type="hidden" class="form-control" name="filtro.NumeroAtendimento" value="@ViewBag.NumeroAtendimento" />
+                <input type="hidden" class="form-control" name="filtro.CodigoTipoAtendimento" value="@ViewBag.CodigoTipoAtendimento" />
+                <input type="hidden" class="form-control" name="filtro.CodigoEspecialidade" value="@ViewBag.CodigoEspecialidade" />
+                <input class="btn-info" type="submit" value="Imprimir" />
+            </form>
+
             <div id="divIndex_ContainerTabela">
                 @if (Model.Prontuarios.Any())
                 {
