@@ -9,6 +9,8 @@ namespace ProntuarioUnico.Business.Interfaces.Data
 {
     public interface IProntuarioRepository
     {
-        List<Prontuario> Listar(DateTime dataInicial, DateTime dataFinal, int? numeroAtendimento, int? codigoEspecialidade, int? codigoTipoAtendimento);
+        List<Prontuario> ListarDetalhado(DateTime dataInicial, DateTime dataFinal, int? numeroAtendimento, int? codigoEspecialidade, int? codigoTipoAtendimento);
+
+
     }
 }

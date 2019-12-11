@@ -337,7 +337,8 @@
     <Content Include="Scripts\Libs\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Libs\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Libs\Global\Global.js" />
-    <Content Include="Reports\ReportProntuario.rdlc" />
+    <Content Include="Reports\ReportProntuarioCompleto.rdlc" />
+    <Content Include="Reports\ReportProntuarioGeral.rdlc" />
     <None Include="Scripts\Libs\Jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.js" />
     <Content Include="Scripts\Libs\Jquery\jquery-3.4.1.min.js" />

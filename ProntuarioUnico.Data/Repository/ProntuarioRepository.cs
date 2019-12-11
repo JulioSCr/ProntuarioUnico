@@ -23,7 +23,7 @@ namespace ProntuarioUnico.Data.Repository
             return this.Context.Prontuarios.Where(_ => _.CodigoPessoaFisica == codigo).ToList();
         }
 
-        public List<Prontuario> Listar(DateTime dataInicial, DateTime dataFinal, int? numeroAtendimento, int? codigoEspecialidade, int? codigoTipoAtendimento)
+        public List<Prontuario> ListarDetalhado(DateTime dataInicial, DateTime dataFinal, int? numeroAtendimento, int? codigoEspecialidade, int? codigoTipoAtendimento)
         {
             DateTime dataFim = dataFinal.Date.AddDays(1);
 

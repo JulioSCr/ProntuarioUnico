@@ -57,14 +57,24 @@
         @if (Model.Prontuarios != null)
         {
 
-            <form action="@Url.Action("ImprimirPDF", "Prontuario")" method="get" target="_blank">
+            <form action="@Url.Action("ImprimirPDFCompleto", "Prontuario")" method="get" target="_blank">
 
                 <input type="hidden" class="form-control" name="filtro.DataInicial" value="@(ViewBag.DataInicial == null ? "": ViewBag.DataInicial.ToString("yyyy-MM-dd"))">
                 <input type="hidden" class="form-control" name="filtro.DataFinal" value="@(ViewBag.DataFinal == null? "": ViewBag.DataFinal.ToString("yyyy-MM-dd"))">
                 <input type="hidden" class="form-control" name="filtro.NumeroAtendimento" value="@ViewBag.NumeroAtendimento" />
                 <input type="hidden" class="form-control" name="filtro.CodigoTipoAtendimento" value="@ViewBag.CodigoTipoAtendimento" />
                 <input type="hidden" class="form-control" name="filtro.CodigoEspecialidade" value="@ViewBag.CodigoEspecialidade" />
-                <input class="btn-info" type="submit" value="Imprimir" />
+                <input class="btn-info" type="submit" value="Imprimir Detalhado" />
+            </form>
+
+            <form action="@Url.Action("ImprimirPDFSimplificado", "Prontuario")" method="get" target="_blank">
+
+                <input type="hidden" class="form-control" name="filtro.DataInicial" value="@(ViewBag.DataInicial == null ? "": ViewBag.DataInicial.ToString("yyyy-MM-dd"))">
+                <input type="hidden" class="form-control" name="filtro.DataFinal" value="@(ViewBag.DataFinal == null? "": ViewBag.DataFinal.ToString("yyyy-MM-dd"))">
+                <input type="hidden" class="form-control" name="filtro.NumeroAtendimento" value="@ViewBag.NumeroAtendimento" />
+                <input type="hidden" class="form-control" name="filtro.CodigoTipoAtendimento" value="@ViewBag.CodigoTipoAtendimento" />
+                <input type="hidden" class="form-control" name="filtro.CodigoEspecialidade" value="@ViewBag.CodigoEspecialidade" />
+                <input class="btn-info" type="submit" value="Imprimir Resumo" />
             </form>
 
             <div id="divIndex_ContainerTabela">

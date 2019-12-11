@@ -58,7 +58,7 @@ namespace ProntuarioUnico.Controllers
 
             if (filtro.Valido())
             {
-                List<Prontuario> prontuarios = this.ProntuarioRepository.Listar(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
+                List<Prontuario> prontuarios = this.ProntuarioRepository.ListarDetalhado(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
                 ProntuarioViewModel model = new ProntuarioViewModel(prontuarios);
 
                 return View("Index", model);
@@ -67,15 +67,64 @@ namespace ProntuarioUnico.Controllers
             return Json("Datas inseridas inválidas.");
         }
 
-        public ActionResult ImprimirPDF(FiltroProntuarioViewModel filtro)
+        public ActionResult ImprimirPDFCompleto(FiltroProntuarioViewModel filtro)
         {
             if (filtro.Valido())
             {
-                List<Prontuario> prontuarios = this.ProntuarioRepository.Listar(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
+                List<Prontuario> prontuarios = this.ProntuarioRepository.ListarDetalhado(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
                 List<AtendimentoPDFView> atendimentos = Mapper.Map<List<Prontuario>, List<AtendimentoPDFView>>(prontuarios);
 
                 LocalReport relatorio = new LocalReport();
-                relatorio.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\ReportProntuario.rdlc";
+                relatorio.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\ReportProntuarioCompleto.rdlc";
+                relatorio.DataSources.Add(new ReportDataSource("Prontuario", atendimentos));
+
+                //parametros
+                relatorio.SetParameters(new ReportParameter("DataImpressao", DateTime.Now.ToString("dd/MM/yyyy")));
+                relatorio.SetParameters(new ReportParameter("Nome", UserAuthentication.ObterNome()));
+                relatorio.SetParameters(new ReportParameter("Periodo", $"{filtro.DataInicial.ToString("dd/MM/yyyy")} a {filtro.DataFinal.ToString("dd/MM/yyyy")}"));
+
+                string descricao = "Todos";
+
+                if (filtro.CodigoTipoAtendimento.HasValue)
+                {
+                    TipoAtendimento tipo = this.TipoAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
+
+                    if (tipo == default(TipoAtendimento))
+                    {
+                        descricao = tipo.DescricaoTipoAtendimento;
+                    }
+                }
+
+                relatorio.SetParameters(new ReportParameter("Atendimento", descricao));
+                descricao = "Todos";
+
+                if (filtro.CodigoTipoAtendimento.HasValue)
+                {
+                    EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
+
+                    if (especialidade == default(EspecialidadeAtendimento))
+                    {
+                        descricao = especialidade.DescricaoEspecialidade;
+                    }
+                }
+
+                relatorio.SetParameters(new ReportParameter("Especialidade", descricao));
+
+                return GerarArquivoPDF(relatorio);
+            }
+
+            return View("BuscarAtendimentos", filtro);
+        }
+
+        public ActionResult ImprimirPDFSimplificado(FiltroProntuarioViewModel filtro)
+        {
+            if (filtro.Valido())
+            {
+                List<Prontuario> prontuarios = this.ProntuarioRepository.ListarDetalhado(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
+                List<AtendimentoPDFView> atendimentos = Mapper.Map<List<Prontuario>, List<AtendimentoPDFView>>(prontuarios);
+
+                LocalReport relatorio = new LocalReport();
+                relatorio.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\ReportProntuarioCompleto.rdlc";
                 relatorio.DataSources.Add(new ReportDataSource("Prontuario", atendimentos));
 
                 //parametros
