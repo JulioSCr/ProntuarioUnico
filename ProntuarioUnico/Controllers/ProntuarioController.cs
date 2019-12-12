@@ -83,32 +83,30 @@ namespace ProntuarioUnico.Controllers
                 relatorio.SetParameters(new ReportParameter("Nome", UserAuthentication.ObterNome()));
                 relatorio.SetParameters(new ReportParameter("Periodo", $"{filtro.DataInicial.ToString("dd/MM/yyyy")} a {filtro.DataFinal.ToString("dd/MM/yyyy")}"));
 
-                string descricao = "Todos";
+                string descricaoTipoAtendimento = "Todos";
 
                 if (filtro.CodigoTipoAtendimento.HasValue)
                 {
                     TipoAtendimento tipo = this.TipoAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
 
-                    if (tipo == default(TipoAtendimento))
+                    if (!(tipo == default(TipoAtendimento)))
                     {
-                        descricao = tipo.DescricaoTipoAtendimento;
+                        descricaoTipoAtendimento = tipo.DescricaoTipoAtendimento;
                     }
                 }
 
-                relatorio.SetParameters(new ReportParameter("Atendimento", descricao));
-                descricao = "Todos";
+                relatorio.SetParameters(new ReportParameter("Atendimento", descricaoTipoAtendimento));
+                string descricaoEspecialidade = "Todos";
 
-                if (filtro.CodigoTipoAtendimento.HasValue)
+                if (filtro.CodigoEspecialidade.HasValue)
                 {
-                    EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
+                    EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(filtro.CodigoEspecialidade.Value);
 
-                    if (especialidade == default(EspecialidadeAtendimento))
+                    if (!(especialidade == default(EspecialidadeAtendimento)))
                     {
-                        descricao = especialidade.DescricaoEspecialidade;
+                        descricaoEspecialidade = especialidade.DescricaoEspecialidade;
                     }
                 }
-
-                relatorio.SetParameters(new ReportParameter("Especialidade", descricao));
 
                 return GerarArquivoPDF(relatorio);
             }
@@ -120,44 +118,47 @@ namespace ProntuarioUnico.Controllers
         {
             if (filtro.Valido())
             {
-                List<Prontuario> prontuarios = this.ProntuarioRepository.ListarDetalhado(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, filtro.CodigoTipoAtendimento);
-                List<AtendimentoPDFView> atendimentos = Mapper.Map<List<Prontuario>, List<AtendimentoPDFView>>(prontuarios);
+                List<Prontuario> prontuarios = this.ProntuarioRepository.ListarDetalhado(filtro.DataInicial, filtro.DataFinal, filtro.NumeroAtendimento, filtro.CodigoEspecialidade, null);
+                List<EspecialidadeAtendimento> especialidades = this.EspecialidadeAtendimentoRepository.ListarAtivos().Where(_ => filtro.CodigoEspecialidade == null || _.CodigoEspecialidade == filtro.CodigoEspecialidade).ToList();
+                List<TipoAtendimento> tipos = this.TipoAtendimentoRepository.ListarAtivos();
+
+                List<AtendimentoSimplificadoPDFViewModel> lista = this.ConverterParaProntuarioSimplificadoViewModel(prontuarios, especialidades, tipos);
 
                 LocalReport relatorio = new LocalReport();
-                relatorio.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\ReportProntuarioCompleto.rdlc";
-                relatorio.DataSources.Add(new ReportDataSource("Prontuario", atendimentos));
+                relatorio.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\ReportProntuarioGeral.rdlc";
+                relatorio.DataSources.Add(new ReportDataSource("Prontuario", lista));
 
                 //parametros
                 relatorio.SetParameters(new ReportParameter("DataImpressao", DateTime.Now.ToString("dd/MM/yyyy")));
                 relatorio.SetParameters(new ReportParameter("Nome", UserAuthentication.ObterNome()));
                 relatorio.SetParameters(new ReportParameter("Periodo", $"{filtro.DataInicial.ToString("dd/MM/yyyy")} a {filtro.DataFinal.ToString("dd/MM/yyyy")}"));
 
-                string descricao = "Todos";
+                string descricaoTipoAtendimento = "Todos";
 
                 if (filtro.CodigoTipoAtendimento.HasValue)
                 {
                     TipoAtendimento tipo = this.TipoAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
 
-                    if (tipo == default(TipoAtendimento))
+                    if (!(tipo == default(TipoAtendimento)))
                     {
-                        descricao = tipo.DescricaoTipoAtendimento;
+                        descricaoTipoAtendimento = tipo.DescricaoTipoAtendimento;
                     }
                 }
 
-                relatorio.SetParameters(new ReportParameter("Atendimento", descricao));
-                descricao = "Todos";
+                relatorio.SetParameters(new ReportParameter("Atendimento", descricaoTipoAtendimento));
+                string descricaoEspecialidade = "Todos";
 
-                if (filtro.CodigoTipoAtendimento.HasValue)
+                if (filtro.CodigoEspecialidade.HasValue)
                 {
-                    EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(filtro.CodigoTipoAtendimento.Value);
+                    EspecialidadeAtendimento especialidade = this.EspecialidadeAtendimentoRepository.Obter(filtro.CodigoEspecialidade.Value);
 
-                    if (especialidade == default(EspecialidadeAtendimento))
+                    if (!(especialidade == default(EspecialidadeAtendimento)))
                     {
-                        descricao = especialidade.DescricaoEspecialidade;
+                        descricaoEspecialidade = especialidade.DescricaoEspecialidade;
                     }
                 }
 
-                relatorio.SetParameters(new ReportParameter("Especialidade", descricao));
+                relatorio.SetParameters(new ReportParameter("Especialidade", descricaoEspecialidade));
 
                 return GerarArquivoPDF(relatorio);
             }
@@ -188,6 +189,25 @@ namespace ProntuarioUnico.Controllers
             out warnings);
 
             return File(renderedBytes, mimeType);
+        }
+
+        private List<AtendimentoSimplificadoPDFViewModel> ConverterParaProntuarioSimplificadoViewModel(List<Prontuario> prontuarios, List<EspecialidadeAtendimento> especialidades, List<TipoAtendimento> tipos)
+        {
+            List<AtendimentoSimplificadoPDFViewModel> models = new List<AtendimentoSimplificadoPDFViewModel>();
+
+            foreach(EspecialidadeAtendimento especialidade in especialidades)
+            {
+                AtendimentoSimplificadoPDFViewModel atendimentoEspecialidade = new AtendimentoSimplificadoPDFViewModel();
+                atendimentoEspecialidade.Especialidade = especialidade.DescricaoEspecialidade;
+                atendimentoEspecialidade.TotalConsulta = Convert.ToString(prontuarios.Count(_ => _.CodigoEspecialidade == especialidade.CodigoEspecialidade && _.CodigoTipoAtendimento == 1));
+                atendimentoEspecialidade.TotalExame = Convert.ToString(prontuarios.Count(_ => _.CodigoEspecialidade == especialidade.CodigoEspecialidade && _.CodigoTipoAtendimento == 2)); 
+                atendimentoEspecialidade.TotalCirurgia = Convert.ToString(prontuarios.Count(_ => _.CodigoEspecialidade == especialidade.CodigoEspecialidade && _.CodigoTipoAtendimento == 3));
+                atendimentoEspecialidade.TotalEspecialidade = Convert.ToString(prontuarios.Count(_ => _.CodigoEspecialidade == especialidade.CodigoEspecialidade));
+
+                models.Add(atendimentoEspecialidade);
+            }
+
+            return models.OrderByDescending(_ => _.TotalEspecialidade).ToList();
         }
     }
 }
