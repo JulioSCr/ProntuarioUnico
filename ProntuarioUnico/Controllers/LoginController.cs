@@ -374,7 +374,7 @@ namespace ProntuarioUnico.Controllers
             //}
 
             //return Json("CRM ou senha inválidos.");
-            return RedirectToAction("Index", "Medico");
+            return RedirectToAction("Index", "Atendimento");
         }
 
         [HttpPost]

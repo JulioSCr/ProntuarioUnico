@@ -20,6 +20,7 @@ namespace ProntuarioUnico.Controllers
         public MedicoController(IMedicoRepository medicoRepository)
         {
             this.MedicoRepository = medicoRepository;
+            ViewBag.NomePagina = "Informações do Médico";
         }
 
         // GET: Medico

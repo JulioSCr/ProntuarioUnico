@@ -33,6 +33,8 @@ namespace ProntuarioUnico.Controllers
             this.MedicoRepository = medicoRepository;
             this.EspecialidadeAtendimentoRepository = especialidadeAtendimentoRepository;
             this.TipoAtendimentoRepository = tipoAtendimentoRepository;
+
+            ViewBag.NomePagina = "Cadastro de Atendimento";
         }
 
         public ActionResult BuscarPaciente(string cpf)
@@ -45,6 +47,8 @@ namespace ProntuarioUnico.Controllers
 
             ViewBag.HasData = viewModel != default(PessoaFisicaViewModel);
             ViewBag.CPF = cpf;
+            ViewBag.NomePagina = "Cadastro de Atendimento - Busca de Paciente";
+
             return View("Index", viewModel);
         }
 
@@ -52,6 +56,8 @@ namespace ProntuarioUnico.Controllers
         {
             ViewBag.HasData = false;
             ViewBag.CPF = "";
+            ViewBag.NomePagina = "Cadastro de Atendimento - Busca de Paciente";
+
             return View(pessoaViewModel);
         }
 
@@ -64,12 +70,16 @@ namespace ProntuarioUnico.Controllers
             ViewBag.CodigoPessoaFisica = codigoPessoaFisica;
             ViewBag.NomePessoa = pessoaFisica.Nome;
 
+            ViewBag.NomePagina = "Cadastro de Atendimento - Preenchimento de Informações";
+
             return View();
         }
 
         [HttpPost]
         public ActionResult Cadastrar(AtendimentoViewModel viewModel)
         {
+            ViewBag.NomePagina = "Finalização de Atendimento - Token";
+
             if (viewModel.Valido())
             {
                 // Cadastro de Atendimento.

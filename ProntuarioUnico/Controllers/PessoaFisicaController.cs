@@ -21,7 +21,7 @@ namespace ProntuarioUnico.Controllers
             this.MedicoRepository = medicoRepository;
 
             CarregarDados();
-            ViewBag.NomePagina = "Informações Pessoais";
+            ViewBag.NomePagina = "Informações Pessoais do Paciente";
         }
 
         // GET: PessoaFisica
