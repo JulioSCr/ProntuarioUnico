@@ -64,7 +64,8 @@ namespace ProntuarioUnico.Controllers
                 return View("Index", model);
             }
 
-            return Json("Datas inseridas inválidas.");
+            ViewBag.Mensagem = "Intervalo de datas invalido.";
+            return View("Index", new ProntuarioViewModel());
         }
 
         public ActionResult ImprimirPDFCompleto(FiltroProntuarioViewModel filtro)

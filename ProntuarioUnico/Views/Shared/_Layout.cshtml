@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Libs/Global/Global.css?" + DateTimeOffset.Now)" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Views/Shared/Layout.css?" + DateTimeOffset.Now)" />
     @RenderSection("head", required: false)
+
+    
 </head>
 
 <body load style="display:none;">
@@ -68,15 +70,44 @@
             </div>
             @RenderBody()
         </div>
+
+        <div class="modal fade" id="divProntuario_ModalIntervaloInvalido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <br /><h1 id="msgRetorno"></h1><br />
+                    </div>
+                    <div class="modal-footer">
+                        <button id="BtnModal" type="submit" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        @*<button type="button" class="btn btn-primary">Salvar mudanças</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
+
+
+
     <script src="@Url.Content("~/Scripts/Libs/Jquery/jquery-3.4.1.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Libs/Bootstrap/bootstrap.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Libs/Bootstrap/bootstrap.bundle.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Libs/Global/Global.js?" + DateTimeOffset.Now)"></script>
     <script src="@Url.Content("~/Scripts/Views/Shared/Layout.js?" + DateTimeOffset.Now)"></script>
+    <script src="@Url.Content("~/Scripts/Views/Login/Login.js?" + DateTimeOffset.Now)"></script>
     <script>
         var gstrGlobalPath = '@mobjGlobal.Monta_GlobalPath(Request)';
     </script>
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: true)
+
+    @if (ViewBag.Mensagem != null)
+    {
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $('#divProntuario_ModalIntervaloInvalido').modal("show", true);
+            $('#msgRetorno').text("@ViewBag.Mensagem");
+        });
+        </script>
+    }
 </body>
 </html>
