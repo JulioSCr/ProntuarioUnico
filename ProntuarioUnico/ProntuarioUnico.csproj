@@ -280,6 +280,7 @@
     <Content Include="Content\Views\Home\Index.css" />
     <Content Include="Content\Views\InserirAtendimento\Index.css" />
     <Content Include="Content\Views\Login\Login.css" />
+    <Content Include="Content\Views\Prontuario\Index.css" />
     <Content Include="Content\Views\Shared\Layout.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -358,6 +359,7 @@
     <Content Include="Scripts\Views\Login\Login.js" />
     <Content Include="Scripts\Views\Medico\Index.js" />
     <Content Include="Scripts\Views\PessoaFisica\Index.js" />
+    <Content Include="Scripts\Views\Prontuario\Index.js" />
     <Content Include="Scripts\Views\Shared\Layout.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
