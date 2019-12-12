@@ -21,7 +21,7 @@ namespace ProntuarioUnico.Business.Entities
         public String Prescricao { get; set; }
         public String Observacoes { get; set; }
 
-        internal Prontuario()
+        public Prontuario()
         {
 
         }
