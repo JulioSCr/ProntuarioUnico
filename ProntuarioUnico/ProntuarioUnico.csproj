@@ -278,9 +278,13 @@
     <Content Include="Content\Libs\Bootstrap\bootstrap.css" />
     <Content Include="Content\Libs\Bootstrap\bootstrap.min.css" />
     <Content Include="Content\Libs\Global\Global.css" />
+    <Content Include="Content\Views\Atendimento\Atendimento.css" />
+    <Content Include="Content\Views\Atendimento\Index.css" />
     <Content Include="Content\Views\Home\Index.css" />
     <Content Include="Content\Views\InserirAtendimento\Index.css" />
     <Content Include="Content\Views\Login\Login.css" />
+    <Content Include="Content\Views\Medico\Index.css" />
+    <Content Include="Content\Views\PessoaFisica\Index.css" />
     <Content Include="Content\Views\Prontuario\Index.css" />
     <Content Include="Content\Views\Shared\Layout.css" />
     <Content Include="favicon.ico" />
@@ -355,7 +359,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Scripts\Views\Atendimento\scripts.js" />
+    <Content Include="Scripts\Views\Atendimento\Index.js" />
     <Content Include="Scripts\Views\Home\Index.js" />
     <Content Include="Scripts\Views\Login\Login.js" />
     <Content Include="Scripts\Views\Medico\Index.js" />

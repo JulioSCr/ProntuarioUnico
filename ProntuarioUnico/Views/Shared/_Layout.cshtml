@@ -31,14 +31,14 @@
                 @if (ViewBag.TipoUsuario.Trim() == "pessoa_fisica")
                 {
                     <li>
-                        <a id=@(controllerName.Trim().Equals("Prontuario") ? "btnLayout_Principal" : "") class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
+                        <a id="btnLayout_Principal" class="click-especial" href="@Url.Action("Index", "Prontuario")">Prontuário</a>
                     </li>
                 }
 
                 @if (ViewBag.TipoUsuario.Trim() == "medico")
                 {
                     <li>
-                        <a id=@(controllerName.Trim().Equals("Atendimento") ? "btnLayout_Principal" : "") class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
+                        <a id="btnLayout_Principal" class="click-especial" href="@Url.Action("Index", "Atendimento")">Atendimento</a>
                     </li>
                 }
             </ul>
