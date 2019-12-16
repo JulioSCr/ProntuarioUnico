@@ -42,7 +42,7 @@ namespace ProntuarioUnico.Controllers
                 Medico medico = this.MedicoRepository.Obter(Convert.ToInt32(medicoViewModel.Codigo));
                 Medico medicoAtualizado = Mapper.Map<MedicoViewModel, Medico>(medicoViewModel);
 
-                if (!this.MedicoRepository.CRMExistente(medicoViewModel.CRM))
+                if (medico.CRM == medicoViewModel.CRM || !this.MedicoRepository.CRMExistente(medicoViewModel.CRM))
                 {
                     if (medicoViewModel.AlterarSenha)
                     {

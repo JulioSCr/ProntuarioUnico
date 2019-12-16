@@ -13,8 +13,9 @@
     <script src="@Url.Content("~/Scripts/Views/PessoaFisica/Index.js?" + DateTimeOffset.Now)"></script>
 }
 
-<form id="frmInserirAtendimentoIndex_Container" action="@Url.Action("Index", "PessoaFisica")" method="post">
-        <div class="cssInserirAtendimentoIndex_Box">
+<form id="frmInserirAtendimentoIndex_Container" action="@Url.Action("Atualizar", "PessoaFisica")" method="post">
+    <input type="hidden" name="pessoaViewModel.Codigo" value="@(Model.Codigo)"/>    
+    <div class="cssInserirAtendimentoIndex_Box">
             <label class="cssInserirAtendimentoIndex_Box_Label">Nome</label>
             <input type="text" class="cssInserirAtendimentoIndex_Box_Componente form-control" name="pessoaViewModel.Nome" placeholder="Nome completo" value="@Model.Nome">
         </div>

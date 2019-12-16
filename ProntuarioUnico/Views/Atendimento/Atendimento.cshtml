@@ -18,6 +18,7 @@
 </div>
 
 <form id="frmInserirAtendimentoIndex_Container" action="@Url.Action("Cadastrar", "Atendimento")" method="post">
+    <input type="hidden" name="viewModel.CodigoPessoaFisica" value="@(ViewBag.CodigoPessoaFisica)" />
     <div id="divInserirAtendimentoIndex_Especialidade" class="cssInserirAtendimentoIndex_Box">
         <label class="cssInserirAtendimentoIndex_Box_Label"> Tipo de Atendimento </label>
         <select class="cssInserirAtendimentoIndex_Box_Componente form-control" name="viewModel.CodigoTipoAtendimento" required>

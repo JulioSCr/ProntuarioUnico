@@ -279,6 +279,7 @@
     <Content Include="Content\Libs\Bootstrap\bootstrap.min.css" />
     <Content Include="Content\Libs\Global\Global.css" />
     <Content Include="Content\Views\Atendimento\Atendimento.css" />
+    <Content Include="Content\Views\Atendimento\FinalizarAtendimento.css" />
     <Content Include="Content\Views\Atendimento\Index.css" />
     <Content Include="Content\Views\Home\Index.css" />
     <Content Include="Content\Views\InserirAtendimento\Index.css" />
